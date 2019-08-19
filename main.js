@@ -51,8 +51,10 @@ client.on('message', message =>
     }
   //メッセージの文字列による条件分岐
     if (message.content === 'タイマー') {
-        console.log("にほん");
       
+        console.log("time");
+        var str = message.content;
+        str.match(/([+-]?[0-9]+\.?[0-9]*)/g); 
         //setTimeout(countup, 1000);
       
         let channel = message.channel;
