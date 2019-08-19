@@ -19,11 +19,27 @@ client.on('ready', message =>
 
 client.on('message', message =>
 {
+  //メンション
 	if(message.isMemberMentioned(client.user))
 	{
-		message.reply( '呼びましたか？' );
+		message.reply( 'やりますねぇ！' );
 		return;
 	}
+  //さいころ
+ // メッセージの文字列による条件分岐
+    if (message.content === 'こん') {
+
+        let channel = message.channel;
+        let author = message.author.username;
+        let reply_text = `こんばんわ。${author}様。`;
+
+        // そのチェンネルにメッセージを送信する
+        channel.reply(reply_text)
+            .then(message => console.log(`Sent message: ${reply_text}`))
+            .catch(console.error);
+        return;
+    }
+  
 });
 
 if(process.env.DISCORD_BOT_TOKEN == undefined)
