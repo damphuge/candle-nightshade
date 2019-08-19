@@ -27,15 +27,17 @@ client.on('message', message =>
 		return;
 	}
   //さいころ
+  
  // メッセージの文字列による条件分岐
-    if (message.content === 'こん') {
+    if (message.content === 'さいころ') {
         console.log("test");
         let channel = message.channel;
         let author = message.author.username;
-        let reply_text = `こんばんわ。${author}様。`;
+        var num = Math.floor( Math.random() * 6 + 1 ) ;
+        let reply_text = `${author}のさいころの出目は`+ num;
 
         // そのチェンネルにメッセージを送信する
-        channel.reply(reply_text)
+        message.reply(reply_text)
             .then(message => console.log(`Sent message: ${reply_text}`))
             .catch(console.error);
         return;
