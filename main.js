@@ -42,6 +42,16 @@ client.on('message', message =>
             .catch(console.error);
         return;
     }
+  //メッセージの文字列による条件分岐
+    if (message.content === 'にほん') {
+        console.log("にほん");
+        let channel = message.channel;
+        let author = message.author.username;
+        // そのチェンネルにメッセージを送信する
+        message.reply("text",{files: [{ attachment: "path", name: "test.png" }]});
+        return;
+    }
+  
   
 });
 
