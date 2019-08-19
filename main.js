@@ -52,10 +52,12 @@ client.on('message', message =>
   //メッセージの文字列による条件分岐
     if (message.content === 'タイマー') {
         console.log("にほん");
+      
+        //setTimeout(countup, 1000);
+      
         let channel = message.channel;
         let author = message.author.username;
         // そのチェンネルにメッセージを送信する
-        message.reply("text",{files: [{ attachment: "https://cdn.glitch.com/279b9a42-2a14-4625-a99c-585d8820443e%2Fmap-japan-10210.png?v=1566197317736", name: "test.png" }]});
         return;
     }
   
