@@ -98,7 +98,7 @@ client.on('message', message =>
   }
   
       //
-  if (message.content.includes("敗北者")) {
+  if (message.content.includes("タイマー")) {
 
   }
   
