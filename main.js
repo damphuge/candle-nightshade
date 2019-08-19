@@ -12,7 +12,7 @@ const client = new discord.Client();
 
 client.on('ready', message =>
 {
-  client.user.setPresence({ game: { name: '小比類巻の彼女' } });  
+  client.user.setPresence({ game: { name: 'ぬきたし２' } });  
 	console.log('bot is ready!');
 });
 
@@ -96,12 +96,13 @@ client.on('message', message =>
       message.reply(replyText).catch(console.error);
     }
   }
-  
-      //
-  if (message.content.includes("タイマー")) {
 
+      //タイマー
+  if (message.content.includes("タイマー")) {
+    var mystr =message.content;
+    var result = mystr.replace(/[0-9０-９]/g, '');
+    console.log(result);
   }
-  
   
 });
 
