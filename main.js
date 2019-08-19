@@ -23,12 +23,13 @@ client.on('message', message =>
 	if(message.isMemberMentioned(client.user))
 	{
 		message.reply( 'やりますねぇ！' );
+    console.log("test");
 		return;
 	}
   //さいころ
  // メッセージの文字列による条件分岐
     if (message.content === 'こん') {
-
+        console.log("test");
         let channel = message.channel;
         let author = message.author.username;
         let reply_text = `こんばんわ。${author}様。`;
