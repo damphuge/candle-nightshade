@@ -98,10 +98,18 @@ client.on('message', message =>
   }
 
       //タイマー
-  if (message.content.includes("タイマー")) {
+  if (message.content.includes("@timer")) {
     var mystr =message.content;
-    var result = mystr.replace(/[0-9０-９]/g, '');
+    var result = mystr.replace(/[^0-9]/g, '');
     console.log(result);
+    message.reply("タイマースタート！");
+    var time= 60000 * result;
+    setTimeout(res, time);
+    function res(){
+      console.log("タイマーストップ");
+    message.reply("タイマーストップ！");
+
+    }
   }
   
 });
