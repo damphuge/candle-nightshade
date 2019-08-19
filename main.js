@@ -12,8 +12,10 @@ const client = new discord.Client();
 
 client.on('ready', message =>
 {
+  client.user.setPresence({ game: { name: '小比類巻の彼女' } });  
 	console.log('bot is ready!');
 });
+
 
 client.on('message', message =>
 {
