@@ -102,7 +102,7 @@ client.on('message', message =>
     var mystr =message.content;
     var result = mystr.replace(/[^0-9]/g, '');
     console.log(result);
-    message.reply("タイマースタート！");
+    message.reply("タイマースタート！"+result+"分");
     var time= 60000 * result;
     setTimeout(res, time);
     function res(){
