@@ -27,8 +27,6 @@ client.on('message', message =>
 		return;
 	}
   //さいころ
-  
- // メッセージの文字列による条件分岐
     if (message.content === 'さいころ') {
         console.log("test");
         let channel = message.channel;
@@ -42,13 +40,22 @@ client.on('message', message =>
             .catch(console.error);
         return;
     }
-  //メッセージの文字列による条件分岐
+  //日本地図
     if (message.content === 'にほん') {
         console.log("にほん");
         let channel = message.channel;
         let author = message.author.username;
         // そのチェンネルにメッセージを送信する
-        message.reply("text",{files: [{ attachment: "path", name: "test.png" }]});
+        message.reply("text",{files: [{ attachment: "https://cdn.glitch.com/279b9a42-2a14-4625-a99c-585d8820443e%2Fmap-japan-10210.png?v=1566197317736", name: "test.png" }]});
+        return;
+    }
+  //メッセージの文字列による条件分岐
+    if (message.content === 'タイマー') {
+        console.log("にほん");
+        let channel = message.channel;
+        let author = message.author.username;
+        // そのチェンネルにメッセージを送信する
+        message.reply("text",{files: [{ attachment: "https://cdn.glitch.com/279b9a42-2a14-4625-a99c-585d8820443e%2Fmap-japan-10210.png?v=1566197317736", name: "test.png" }]});
         return;
     }
   
