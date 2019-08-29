@@ -10,7 +10,8 @@ http.createServer(function(request, response)
 const discord = require('discord.js');
 const client = new discord.Client();
 
-
+var tenki
+//天気
 var request = require('request');
 var parseString = require('xml2js').parseString;
  
@@ -26,7 +27,7 @@ request(url, function (error, response, body) {
             var max = "最高気温は" + result.weatherforecast.pref[0].area[3].info[0].temperature[0].range[0]._ + "度ハメ\n";
             var min = "最低気温は" + result.weatherforecast.pref[0].area[3].info[0].temperature[0].range[1]._ + "度ですハメ";
  
-            var tenki = "ハメドリくんだハメ。天気予報だハメ\n" + day + weather + detail + max + min;
+            tenki = "ハメドリくんだハメ。青森の天気予報だハメ\n" + day + weather + detail + max + min;
  
             console.log(tenki);
  
