@@ -1,3 +1,10 @@
+//起動は node main.js
+//nodemon を入れると自動化できる（nodemon　node.jsで検索）
+//uptime rebootは気にするな
+//基本的に保存してから自動起動するけどたまにしない
+//一度起動してからは5分後に絶対落ちる(それをuptaime rebootで無理やり起こしてる)
+//おめシスはいいぞ
+
 // Response for Uptime Robot
 const http = require('http');
 http.createServer(function(request, response)
@@ -16,7 +23,7 @@ var request = require('request');
 var parseString = require('xml2js').parseString;
  
 var url = 'https://www.drk7.jp/weather/xml/02.xml';
- 
+ //ここがXMLパーサ
 request(url, function (error, response, body) {
     if (!error && response.statusCode == 200) {
         parseString(body, function (err, result) {
@@ -40,7 +47,7 @@ request(url, function (error, response, body) {
 
 
 
-
+//ここからBOTの反応
 client.on('ready', message =>
 {
   client.user.setPresence({ game: { name: 'ぬきたし２' } });  
