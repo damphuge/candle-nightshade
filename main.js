@@ -23,13 +23,14 @@ const client = new discord.Client();
 
 var tenki
 
-const prefAomori = '02' // xmlファイルの番号
-const areaTsugaru = 2   // xmlファイル内での地域番号
 //天気
+const prefAomori = '02'; // xmlファイルの番号
+const areaTsugaru = 2;   // xmlファイル内での地域番号
+
 var request = require('request');
 var parseString = require('xml2js').parseString;
 
-var url = 'https://www.drk7.jp/weather/xml/02.xml';
+var url = 'https://www.drk7.jp/weather/xml/' + prefAomori + '.xml';
  //ここがXMLパーサ
 request(url, function (error, response, body) {
     if (!error && response.statusCode == 200) {
@@ -98,13 +99,13 @@ client.on('message', message =>
     }
   //天気
    if (message.content === '天気') {
-        console.log("天気");
-        let channel = message.channel;
-        let author = message.author.username;
-        // そのチェンネルにメッセージを送信する
-        message.reply(tenki);
-        return;
-    }
+      console.log("天気");
+      let channel = message.channel;
+      let author = message.author.username;
+      // そのチェンネルにメッセージを送信する
+      message.reply(tenki);
+      return;
+   }
   //メッセージの文字列による条件分岐
     if (message.content === 'タイマー') {
       

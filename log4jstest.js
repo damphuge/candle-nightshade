@@ -7,10 +7,12 @@ log4js.configure({
   },
   categories: {
     default: {appenders: ['out'], level: 'warn'},
-    develop: {appenders: ['log'], level: 'debug'}
+    develop: {appenders: ['out'], level: 'debug'}
   }
 })
 
-const logger = log4js.getLogger('develop');
+const logger = log4js.getLogger();
 
 logger.debug('Hello world!');
+var today = new Date();
+logger.debug(today);
