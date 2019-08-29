@@ -5,20 +5,27 @@ const youtube_alias_url = {
   "しいしい": "https://www.youtube.com/channel/UC_4tXjqecqox5Uc05ncxpxg/live"
 }
 
+/*
+  Youtube LiveのURLを返信する。
+  
+  @param String $alias あだ名
+  @return String $text youtube_url
+*/
 let getUrl = function(alias) {
-  let 
-  if(!(alias in youtube_alias_url)){
+  let text = 'You are FRIEND:) https://www.youtube.com/channel/UC2jBqh7fCEPuTdpwKmxHvjA';
+  if(alias in youtube_alias_url){
+    text = youtube_alias_url[alias];
+  }
+  return text;
+  /*
+  message.reply(reply_text)
+    .then(message => console.log(`Sent message: $(reply_text)`))
+    .catch(console.error);
+  return;
+  */
 }
-if (message.content === 'さいころ') {
-        console.log("test");
-        let channel = message.channel;
-        let author = message.author.username;
-        var num = Math.floor( Math.random() * 6 + 1 ) ;
-        let reply_text = `${author}のさいころの出目は`+ num;
 
-        // そのチェンネルにメッセージを送信する
-        message.reply(reply_text)
-            .then(message => console.log(`Sent message: ${reply_text}`))
-            .catch(console.error);
-        return;
-    }
+// exports
+module.exports = {
+  getUrl: getUrl
+}
