@@ -9,6 +9,12 @@
 //おめシスはいいぞ
 //おめシスはいいぞ
 
+// Logger, Dateなどのやつ
+var util = require('./utilities.js');
+var logger = util.Log4js.getLogger();
+
+logger.info(util.getRelativeDate());
+
 // Response for Uptime Robot
 const http = require('http');
 http.createServer(function(request, response)

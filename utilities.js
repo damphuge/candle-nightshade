@@ -9,9 +9,8 @@ const log4js = require('log4js')
 log4js.configure({
   appenders: {
     logFile: {
-      type:'datefile',
+      type:'dateFile',
       filename:'./logs/system.log',
-      pattern: "-yyyy-mm-dd"
     },
     console: {
       type:'stdout'
