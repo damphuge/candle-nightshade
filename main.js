@@ -22,16 +22,17 @@ const discord = require('discord.js');
 const client = new discord.Client();
 
 var tenki
+
+const areaAomori = [['三八上北', 0], ['下北', 1], ['津軽', 2]]
 //天気
 var request = require('request');
 var parseString = require('xml2js').parseString;
- 
+
 var url = 'https://www.drk7.jp/weather/xml/02.xml';
  //ここがXMLパーサ
 request(url, function (error, response, body) {
     if (!error && response.statusCode == 200) {
         parseString(body, function (err, result) {
- 
             var day = result.weatherforecast.pref[0].area[3].info[0]['$'].date + "\n";
             var weather = result.weatherforecast.pref[0].area[3].info[0].weather[0] + "\n";
             var detail = result.weatherforecast.pref[0].area[3].info[0].weather_detail[0] + "\n";
