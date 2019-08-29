@@ -1,22 +1,28 @@
 'use strict'
 /*
   logger
+  ref:
+  - log4jsの覚え書き - log4.jsを使ってみた - - Qiita
+    - https://qiita.com/_daisuke/items/865cf929a403cc9eec53
 */
-
 const log4js = require('log4js')
 log4js.configure({
   appenders: {
-    log: {type:'file', filename:'system.log'},
-    out: {type:'stdout'}
+    logFile: {
+      type:'datefile',
+      filename:'./logs/system.log',
+      pattern: "-yyyy-mm-dd"
+    },
+    console: {
+      type:'stdout'
+    }
   },
   categories: {
-    default: {appenders: ['out'], level: 'info'},
-    develop: {appenders: ['out'], level: 'debug'},
-    runnning: {appenders: ['log'], level: 'warn'}
+    default: {appenders: ['console'], level: 'info'},
+    develop: {appenders: ['console'], level: 'debug'},
+    master: {appenders: ['logFile'], level: 'warn'}
   }
 })
-
-const logger = log4js.getLogger();
 
 /*
   相対日付を取得する。
@@ -65,6 +71,3 @@ var getRelativeDate = function(relativeEx) {
   
   return date;
 };
-
-logger.info(getRelativeDate('昨日'), getRelativeDate('明日'));
-logger.info(getRelativeDate('本日'));
