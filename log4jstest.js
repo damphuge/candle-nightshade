@@ -1,3 +1,5 @@
+
+
 'use strict'
 const log4js = require('log4js')
 log4js.configure({
@@ -6,8 +8,9 @@ log4js.configure({
     out: {type:'stdout'}
   },
   categories: {
-    default: {appenders: ['out'], level: 'warn'},
-    develop: {appenders: ['out'], level: 'debug'}
+    default: {appenders: ['out'], level: 'info'},
+    develop: {appenders: ['out'], level: 'debug'},
+    runnning: {appenders: ['log'], level: 'warn'}
   }
 })
 
@@ -16,3 +19,19 @@ const logger = log4js.getLogger();
 logger.debug('Hello world!');
 var today = new Date();
 logger.debug(today);
+
+// import
+const { startOfDay, addDays } = require('date-fns');
+const { convertToTimeZone } = require('date-fns-timezone');
+
+// タイムゾーン定義
+const timeZone = "Asia/Tokyo";
+
+// 現在時刻(UTC)を取得
+const targetDate = new Date();
+// TimeZone付きDateに変換
+const zonedTargetDate = convertToTimeZone(targetDate, { timeZone: timeZone });
+// 文字列化
+const d1 = zonedTargetDate.toISOString(); // => '2019-03-05T15:00:00.000Z'
+
+console.log(d1);
