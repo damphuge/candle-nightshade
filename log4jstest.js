@@ -33,17 +33,19 @@ logger.info('Hello world!');
   - JavaScriptでゼロパディングして桁をそろえる方法
     - https://so-zou.jp/web-app/tech/programming/javascript/grammar/data-type/string/zero-padding.htm
 */
-var getToday = function(relative) {
+var getToday = function(relativeEx) {
   // import
   const { addDays } = require('date-fns');
   const { convertToTimeZone } = require('date-fns-timezone');
+  var relativeDate = {'一昨日':-2, '昨日': -1, '今日': 0, '明日': 1, '明後日': 2};
+  
   // タイムゾーン定義
   const timeZone = "Asia/Tokyo";
   // 現在時刻(UTC)を取得
-  const targetDate = new Date();
+  const nowDate = new Date();
   // TimeZone付きDateに変換
   const zonedTargetDate = convertToTimeZone(targetDate, { timeZone: timeZone });
-  
+  const   
   
   // 年月日を取得
   const year = zonedTargetDate.getFullYear();
