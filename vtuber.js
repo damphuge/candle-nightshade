@@ -28,6 +28,8 @@ let getUrl = function(alias) {
 /*
   https://omocoro.jp/kiji/12157/ oldest
   https://omocoro.jp/kiji/188733/ newest
+  hit: 200
+  200のlistを作ってファイル保存→あとで読み込んでそこからランダム
 */
 // exports
 module.exports = {
