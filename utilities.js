@@ -1,6 +1,8 @@
-
-
 'use strict'
+/*
+  logger
+*/
+
 const log4js = require('log4js')
 log4js.configure({
   appenders: {
@@ -37,6 +39,7 @@ var getRelativeDate = function(relativeEx) {
   
   // 相対日付を定義
   const relativeDate = {'一昨日':-2, '昨日': -1, '今日': 0, '明日': 1, '明後日': 2};
+  relativeDate["本日"] = 0;
   
   // タイムゾーン定義
   const timeZone = "Asia/Tokyo";
@@ -49,7 +52,7 @@ var getRelativeDate = function(relativeEx) {
   if(relativeEx in relativeDate){
     zonedTargetDate = addDays(zonedCurrentDate, relativeDate[relativeEx]);
   } else {
-    throw new Error(`${relativeEx} is not supported by getRelativeDate().`);
+    throw new Error(`${relativeEx} is not supported by getRelativeDate.`);
   }
   // 年月日を取得
   const year = zonedTargetDate.getFullYear();
@@ -63,4 +66,5 @@ var getRelativeDate = function(relativeEx) {
   return date;
 };
 
-logger.info(getRelativeDate(), getRelativeDate('昨日'), getRelativeDate('明日'));
+logger.info(getRelativeDate('昨日'), getRelativeDate('明日'));
+logger.info(getRelativeDate('本日'));
