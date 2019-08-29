@@ -47,7 +47,6 @@ let getRelativeDate = function(relativeEx) {
   // 相対日付を定義
   const relativeDate = {'一昨日':-2, '昨日': -1, '今日': 0, '明日': 1, '明後日': 2};
   relativeDate["本日"] = 0;
-  relativeDate[""] = 0;
   
   // タイムゾーン定義
   const timeZone = "Asia/Tokyo";
@@ -57,6 +56,7 @@ let getRelativeDate = function(relativeEx) {
   const zonedCurrentDate = convertToTimeZone(currentDate, { timeZone: timeZone });
   let zonedTargetDate = zonedCurrentDate;
   // 相対日付を取得
+  if(!relativeEx){ relativeEx = '今日'}
   if(relativeEx in relativeDate){
     zonedTargetDate = addDays(zonedCurrentDate, relativeDate[relativeEx]);
   } else {

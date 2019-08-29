@@ -29,6 +29,7 @@ var tenki
 //天気
 const prefAomori = '02'; // xmlファイルの番号
 const areaTsugaru = 2;   // xmlファイル内での地域番号
+const today = util.getRelativeDate();
 
 var request = require('request');
 var parseString = require('xml2js').parseString;
@@ -38,8 +39,9 @@ var url = 'https://www.drk7.jp/weather/xml/' + prefAomori + '.xml';
 request(url, function (error, response, body) {
     if (!error && response.statusCode == 200) {
         parseString(body, function (err, result) {
-            var day = result.weatherforecast.pref[0].area[areaTsugaru].info[0]['$'].date + "\n";
-            var weather = result.weatherforecast.pref[0].area[areaTsugaru].info[0].weather[0] + "\n";
+          if(result.weatherforecast.pref[0].area[areaTsugaru].info[0]['$'].date === today)
+            var day = result.weatherforecast.pref[0].area[areaTsugaru].info[today]['$'].date + "\n";
+            var weather = result.weatherforecast.pref[0].area[areaTsugaru].info[today].weather[0] + "\n";
             var detail = result.weatherforecast.pref[0].area[areaTsugaru].info[0].weather_detail[0] + "\n";
             var max = "最高気温は" + result.weatherforecast.pref[0].area[areaTsugaru].info[0].temperature[0].range[0]._ + "度ハメ\n";
             var min = "最低気温は" + result.weatherforecast.pref[0].area[areaTsugaru].info[0].temperature[0].range[1]._ + "度ですハメ";
