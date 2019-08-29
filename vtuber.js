@@ -25,6 +25,10 @@ let getUrl = function(alias) {
   */
 }
 
+/*
+  https://omocoro.jp/kiji/12157/ oldest
+  https://omocoro.jp/kiji/188733/ newest
+*/
 // exports
 module.exports = {
   getUrl: getUrl
