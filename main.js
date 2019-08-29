@@ -10,6 +10,36 @@ http.createServer(function(request, response)
 const discord = require('discord.js');
 const client = new discord.Client();
 
+
+var request = require('request');
+var parseString = require('xml2js').parseString;
+ 
+var url = 'http://www.drk7.jp/weather/xml/13.xml';
+ 
+request(url, function (error, response, body) {
+    if (!error && response.statusCode == 200) {
+        parseString(body, function (err, result) {
+ 
+            var day = result.weatherforecast.pref[0].area[3].info[0]['$'].date + "\n";
+            var weather = result.weatherforecast.pref[0].area[3].info[0].weather[0] + "\n";
+            var detail = result.weatherforecast.pref[0].area[3].info[0].weather_detail[0] + "\n";
+            var max = "最高気温は" + result.weatherforecast.pref[0].area[3].info[0].temperature[0].range[0]._ + "度ハメ\n";
+            var min = "最低気温は" + result.weatherforecast.pref[0].area[3].info[0].temperature[0].range[1]._ + "度ですハメ";
+ 
+            var tenki = "ハメドリくんだハメ。天気予報だハメ\n" + day + weather + detail + max + min;
+ 
+            console.log(tenki);
+ 
+        });
+    } else {
+        console.log(error + " : " + response);
+    }
+ 
+});
+
+
+
+
 client.on('ready', message =>
 {
   client.user.setPresence({ game: { name: 'ぬきたし２' } });  
@@ -50,6 +80,15 @@ client.on('message', message =>
         let author = message.author.username;
         // そのチェンネルにメッセージを送信する
         message.reply("text",{files: [{ attachment: "https://cdn.glitch.com/279b9a42-2a14-4625-a99c-585d8820443e%2Fmap-japan-10210.png?v=1566197317736", name: "test.png" }]});
+        return;
+    }
+  //天気
+   if (message.content === '天気') {
+        console.log("天気");
+        let channel = message.channel;
+        let author = message.author.username;
+        // そのチェンネルにメッセージを送信する
+        message.reply(tenki);
         return;
     }
   //メッセージの文字列による条件分岐
@@ -122,28 +161,3 @@ if(process.env.DISCORD_BOT_TOKEN == undefined)
 
 client.login( process.env.DISCORD_BOT_TOKEN );
 
-var request = require('request');
-var parseString = require('xml2js').parseString;
- 
-var url = 'http://www.drk7.jp/weather/xml/02.xml';
- //
-// request(url, function (error, response, body) {
-//     if (!error && response.statusCode == 200) {
-//         parseString(body, function (err, result) {
- 
-//             var day = result.weatherforecast.pref[0].area[3].info[0]['$'].date + "\n";
-//             var weather = result.weatherforecast.pref[0].area[3].info[0].weather[0] + "\n";
-//             var detail = result.weatherforecast.pref[0].area[3].info[0].weather_detail[0] + "\n";
-//             var max = "最高気温は" + result.weatherforecast.pref[0].area[3].info[0].temperature[0].range[0]._ + "度\n";
-//             var min = "最低気温は" + result.weatherforecast.pref[0].area[3].info[0].temperature[0].range[1]._ + "度です";
- 
-//             var message = "おはようございます。天気予報です\n" + day + weather + detail + max + min;
- 
-//             console.log(message);
- 
-//         });
-//     } else {
-//         console.log(error + " : " + response);
-//     }
- 
-// });
