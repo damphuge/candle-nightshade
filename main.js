@@ -174,6 +174,14 @@ client.on('message', message =>
     }
   }
   
+  //usage
+  if (message.content === '!usage') {
+    let reply_text = 'さいころ, 天気, にほん, @timer, 敗北者, メンション';
+    message.reply(reply_text)
+        .then(message => console.log(`Sent message: ${reply_text}`))
+        .catch(console.error);
+  }
+  
 });
 
 if(process.env.DISCORD_BOT_TOKEN == undefined)
