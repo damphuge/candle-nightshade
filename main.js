@@ -15,7 +15,7 @@ var tenki
 var request = require('request');
 var parseString = require('xml2js').parseString;
  
-var url = 'http://www.drk7.jp/weather/xml/13.xml';
+var url = 'https://www.drk7.jp/weather/xml/02.xml';
  
 request(url, function (error, response, body) {
     if (!error && response.statusCode == 200) {
