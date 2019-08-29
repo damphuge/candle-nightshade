@@ -5,6 +5,7 @@
   - log4jsの覚え書き - log4.jsを使ってみた - - Qiita
     - https://qiita.com/_daisuke/items/865cf929a403cc9eec53
 */
+/* 結構実装が面倒（徹底が面倒い）のでパス
 const log4js = require('log4js')
 log4js.configure({
   appenders: {
@@ -22,6 +23,7 @@ log4js.configure({
     master: {appenders: ['logFile'], level: 'warn'}
   }
 })
+*/
 
 /*
   相対日付を取得する。
@@ -37,7 +39,7 @@ log4js.configure({
   @param String $relativeEx 一昨日、昨日、今日、明日、明後日
   @return String $date YYYY/MM/DD形式の日付
 */
-var getRelativeDate = function(relativeEx) {
+let getRelativeDate = function(relativeEx) {
   // import
   const { addDays } = require('date-fns');
   const { convertToTimeZone } = require('date-fns-timezone');
@@ -45,6 +47,7 @@ var getRelativeDate = function(relativeEx) {
   // 相対日付を定義
   const relativeDate = {'一昨日':-2, '昨日': -1, '今日': 0, '明日': 1, '明後日': 2};
   relativeDate["本日"] = 0;
+  relativeDate[""] = 0;
   
   // タイムゾーン定義
   const timeZone = "Asia/Tokyo";

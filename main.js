@@ -10,10 +10,8 @@
 //おめシスはいいぞ
 
 // Logger, Dateなどのやつ
-var util = require('./utilities.js');
-var logger = util.Log4js.getLogger();
-
-logger.info(util.getRelativeDate());
+let util = require('./utilities.js');
+console.log(util.getRelativeDate());
 
 // Response for Uptime Robot
 const http = require('http');
