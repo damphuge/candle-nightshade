@@ -4,6 +4,7 @@
   "description": "discord bot sample on Glitch",
   "main": "main.js",
   "dependencies": {
+    "date-fns-timezone": "^0.1.4",
     "discord.js": "^11.5.1",
     "request": "^2.88.0",
     "xml2js": "^0.4.19"
