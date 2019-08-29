@@ -16,10 +16,9 @@ log4js.configure({
 
 const logger = log4js.getLogger();
 
-logger.debug('Hello world!');
-var today = new Date();
-logger.debug(today);
+logger.info('Hello world!');
 
+// node.jsでタイムゾーンの変換処理にdate-fns-timezoneを利用する - Qiita: https://qiita.com/kazuhiro1982/items/b1235a893ee874d8ff65
 // import
 const { startOfDay, addDays } = require('date-fns');
 const { convertToTimeZone } = require('date-fns-timezone');
@@ -34,4 +33,8 @@ const zonedTargetDate = convertToTimeZone(targetDate, { timeZone: timeZone });
 // 文字列化
 const d1 = zonedTargetDate.toISOString(); // => '2019-03-05T15:00:00.000Z'
 
-console.log(d1);
+logger.info(d1);
+// 
+
+var 
+
