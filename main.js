@@ -2,6 +2,8 @@
 
 // Dateなどのやつ
 let util = require('./utilities.js');
+// 天気
+let Airi = require('./weatherRoidTypeA.js');
 
 // Response for Uptime Robot
 const http = require('http');
@@ -15,8 +17,6 @@ http.createServer(function(request, response)
 const discord = require('discord.js');
 const client = new discord.Client();
 
-// 天気
-let Airi = require('./weatherRoidTypeA.js');
 /*
 var tenki;
 
@@ -101,12 +101,12 @@ client.on('message', message =>
     }
   //天気
   if (message.content.match(/^.{2,3}の天気$/)) {
-    console.log(weather_request);
-    const date_request = getRelativeDate(weather_request.replace(/の天気/, ''));
+    const date_request = util.getRelativeDate(message.content.replace(/の天気/, ''));
+    console.log(date_request);
     let channel = message.channel;
     let author = message.author.username;
     // そのチェンネルにメッセージを送信する
-    message.reply(Airi.getWeather());
+    message.reply(Airi.getWeather(date_request));
     return;
   }
   //メッセージの文字列による条件分岐
