@@ -17,7 +17,7 @@ let getWeather = function(date, area=2, pref='02'){
         // 日付に一致する天気を取得。
           for(let i=0; i < 6; i++) {
             if(result.weatherforecast.pref[0].area[area].info[i]['$'].date === date){
-              console.log(date);
+              
               var day = result.weatherforecast.pref[0].area[area].info[i]['$'].date + "\n";
               var weather = result.weatherforecast.pref[0].area[area].info[i].weather[0] + "\n";
               var detail = result.weatherforecast.pref[0].area[area].info[i].weather_detail[0] + "\n";
