@@ -235,7 +235,7 @@ ch.fetch(url, { q: 'node.js'}, function (err, $, res) {
     // HTMLタイトルを表示
     //console.log($('title').text());
 
-    console.log($('body').text());
+    console.log($('b').text());
 
 });
     
