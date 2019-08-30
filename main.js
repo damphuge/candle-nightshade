@@ -199,11 +199,16 @@ client.on('message', message =>
     }
     //メガガイア
   if (message.content.includes("@mega")) {
-        console.log("オーキド博士");
+      console.log("メガガイア");
+     　var mystr =message.content;
+    　　var result = mystr.replace(/[^0-9]/g, '');
+            
         let channel = message.channel;
         let author = message.author.username;
+    
         // そのチェンネルにメッセージを送信する
-        message.reply("ｼﾞｬﾝｼﾞｬﾝﾊﾞﾘﾊﾞﾘ。。。",{files: [{ attachment: "https://cdn.glitch.com/279b9a42-2a14-4625-a99c-585d8820443e%2Fa_okd.jpg?v=1567130077289", name: "okd.png" }]});
+        //message.reply("ｼﾞｬﾝｼﾞｬﾝﾊﾞﾘﾊﾞﾘ。。。",{files: [{ attachment: "http://hall.gaia-jp.com/sp/gdrawmb.php?st=aom&dt=y&mno="+result}]});
+        client.send_file(message.channel, "http://hall.gaia-jp.com/sp/gdrawmb.php?st=aom&dt=y&mno="+result);
         return;
     }
 });
