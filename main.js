@@ -24,7 +24,7 @@ http.createServer(function(request, response)
 const discord = require('discord.js');
 const client = new discord.Client();
 
-var tenki
+var tenki;
 
 //天気
 const prefAomori = '02'; // xmlファイルの番号
