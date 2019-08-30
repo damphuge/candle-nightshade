@@ -215,31 +215,30 @@ if(message.isMemberMentioned(client.user))
     
         // そのチェンネルにメッセージを送信する
           var url ="http://hall.gaia-jp.com/sp/mb/playdatas/sdetail?st=aom&rb=S20&mno=" + result;
-          mega(url);
+         var info;
          var image = "http://hall.gaia-jp.com/sp/gdrawmb.php?st=aom&dt=t&mno=" + result;
     
-         //console.log(image);
-         message.reply("メガガイアはデータ偽装してるから信用するなハメ",{files: [{ attachment: image, name: "okd.png" }]});
-        return;
-    } 
-      
-  function mega(url){
-    
- 
- 
-ch.headers['User-Agent'] = 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/34.0.1847.131 Safari/537.36';
+            ch.headers['User-Agent'] = 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/34.0.1847.131 Safari/537.36';
 ch.fetch(url, { q: 'node.js'}, function (err, $, res) {
     // レスポンスヘッダを参照
 // console.log(res.headers);
 
     // HTMLタイトルを表示
     //console.log($('title').text());
-
-    console.log($('b').text());
+var info = $('b').text();
+    //console.log($('b').text());
+  console.log(info);
 
 });
-    
-  }
+         message.reply("メガガイアはデータ偽装してるから信用するなハメ",{files: [{ attachment: image, name: "okd.png" }]});
+        return;
+    } 
+      
+
+  
+ 
+  
+  
   
 });
 
