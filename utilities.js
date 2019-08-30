@@ -39,6 +39,8 @@ log4js.configure({
   @param String $relativeEx 一昨日、昨日、今日、明日、明後日
   @return String $date YYYY/MM/DD形式の日付
 */
+
+
 let getRelativeDate = function(relativeEx) {
   // import
   const { addDays } = require('date-fns');

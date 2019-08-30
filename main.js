@@ -176,11 +176,23 @@ client.on('message', message =>
   
   //usage
   if (message.content === '!usage') {
-    let reply_text = 'さいころ, 天気, にほん, @timer, 敗北者, メンション';
+    let reply_text = 'さいころ, 天気, にほん, @timer, 敗北者, メンション, オーキド博士（アローラのすがたもあるぞい）';
     message.reply(reply_text)
         .then(message => console.log(`Sent message: ${reply_text}`))
         .catch(console.error);
   }
+  //は
+  //それ、utilities.js にクソコピペしてたからだ。すま
+  // 手元で作っておくわ
+  //オーキド博士 
+   if (message.content === 'オーキド博士') {
+        console.log("オーキド博士");
+        let channel = message.channel;
+        let author = message.author.username;
+        // そのチェンネルにメッセージを送信する
+        message.reply("text",{files: [{ attachment: "https://cdn.glitch.com/279b9a42-2a14-4625-a99c-585d8820443e%2Fokd.jpg?v=1567130070416", name: "okd.png" }]});
+        return;
+    }
   
 });
 
