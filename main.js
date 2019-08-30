@@ -15,6 +15,9 @@ http.createServer(function(request, response)
 const discord = require('discord.js');
 const client = new discord.Client();
 
+// 天気
+let Airi = require('./weatherRoidTypeA.js');
+/*
 var tenki;
 
 //天気
@@ -50,7 +53,7 @@ request(url, function (error, response, body) {
     }
  
 });
-
+*/
 
 
 //ここからBOTの反応
@@ -97,14 +100,15 @@ client.on('message', message =>
         return;
     }
   //天気
-   if (message.content === '天気') {
-      console.log("天気");
-      let channel = message.channel;
-      let author = message.author.username;
-      // そのチェンネルにメッセージを送信する
-      message.reply(tenki);
-      return;
-   }
+  if (message.content.match(/^.{2,3}の天気$/)) {
+    console.log(weather_request);
+    const date_request = getRelativeDate(weather_request.replace(/の天気/, ''));
+    let channel = message.channel;
+    let author = message.author.username;
+    // そのチェンネルにメッセージを送信する
+    message.reply(Airi.getWeather());
+    return;
+  }
   //メッセージの文字列による条件分岐
     if (message.content === 'タイマー') {
       
@@ -201,4 +205,3 @@ if(process.env.DISCORD_BOT_TOKEN == undefined)
 }
 
 client.login( process.env.DISCORD_BOT_TOKEN );
-
