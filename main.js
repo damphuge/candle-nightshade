@@ -198,6 +198,24 @@ client.on('message', message =>
         return;
     }
   
+  
+  var client = require('cheerio-httpcli');
+ 
+client.fetch('http://www.yahoo.co.jp')
+.then(function (result) {
+    var $ = result.$;
+    $('.topicsindex .emphasis a').each(function (idx) {
+        var title = $(this).contents().filter(function () {return this.nodeType === 3;}).text(),
+            url = $(this).attr('href');
+ 
+        console.log(title + ',' + url);
+    });
+})
+.catch(function (error) {
+    console.log(error);
+});
+  
+  
     //メガガイア
   if (message.content.includes("@mega")) {
       console.log("メガガイア");
@@ -214,6 +232,9 @@ client.on('message', message =>
          message.reply("メガガイアはデータ偽装してるから信用するなハメ",{files: [{ attachment: image, name: "okd.png" }]});
         return;
     } 
+  function test(){
+    console.log();
+  }
   
 });
 
