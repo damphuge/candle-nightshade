@@ -26,11 +26,11 @@ let getWeather = function(date, area=2, pref='02'){
             var min = "最低気温は" + result.weatherforecast.pref[0].area[area].info[i].temperature[0].range[1]._ + "度ですハメ";
             
             //今は青森だけど[TODO]
-            var tenki = "ハメドリくんだハメ。青森の天気予報だハメ\n";
+            var tenki = "ハメドリくんだハメ。青森の天気予報だハメ\n" + day + weather + detail + max + min;
+            callback(null, tenki);
           }
         }
       });
-      return tenki;
     } else {
       console.log(error + " : " + response);
     }
