@@ -181,7 +181,7 @@ client.on('message', message =>
   }
   //オーキド博士 
    if (message.content === 'オーキド博士') {
-        console.log("オーキド博士");
+        console.log("オーキド博士"); 
         let channel = message.channel;
         let author = message.author.username;
         // そのチェンネルにメッセージを送信する
@@ -197,22 +197,24 @@ client.on('message', message =>
         message.reply("ファッキュー・・・ぶち殺すぞ",{files: [{ attachment: "https://cdn.glitch.com/279b9a42-2a14-4625-a99c-585d8820443e%2Fa_okd.jpg?v=1567130077289", name: "okd.png" }]});
         return;
     }
-    //メガガイア
-  if (message.content.includes("@mega")) {
-      console.log("メガガイア");
-     　var mystr =message.content;
-    　　var result = mystr.replace(/[^0-9]/g, '');
+  
+//     //メガガイア
+//   if (message.content.includes("@mega")) {
+//       console.log("メガガイア");
+//      　var mystr =message.content;
+//     　　var result = mystr.replace(/[^0-9]/g, '');
             
-        let channel = message.channel;
-        let author = message.author.username;
+//         let channel = message.channel;
+//         let author = message.author.username;
     
-        // そのチェンネルにメッセージを送信する
+//         // そのチェンネルにメッセージを送信する
         
-         var image = "http://hall.gaia-jp.com/sp/gdrawmb.php?st=aom&dt=y&mno=" + result;
-    console.log(image);
-        channel.send('pong', { file: { attachment: image } });
-        return;
-    }
+//          var image = "http://hall.gaia-jp.com/sp/gdrawmb.php?st=aom&dt=y&mno=" + result;
+//          console.log(image);
+//          message.reply("ファッキュー・・・ぶち殺すぞ",{files: [{ attachment: image, name: "okd.png" }]});
+//         return;
+//     }
+  
 });
 
 if(process.env.DISCORD_BOT_TOKEN == undefined)
