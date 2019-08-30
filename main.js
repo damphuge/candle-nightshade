@@ -218,7 +218,7 @@ if(message.isMemberMentioned(client.user))
           mega(url);
          var image = "http://hall.gaia-jp.com/sp/gdrawmb.php?st=aom&dt=t&mno=" + result;
     
-         console.log(image);
+         //console.log(image);
          message.reply("メガガイアはデータ偽装してるから信用するなハメ",{files: [{ attachment: image, name: "okd.png" }]});
         return;
     } 
@@ -229,10 +229,10 @@ if(message.isMemberMentioned(client.user))
  
 ch.fetch('http://www.google.com/search',function (err, $, res, body) {
   // レスポンスヘッダを参照
-  console.log(res.headers);
+  console.log(body);
  
   // HTMLタイトルを表示
-  console.log($('.b').text());
+  //console.log($('h3').text());
  
 });
     
