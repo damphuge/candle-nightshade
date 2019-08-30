@@ -9,9 +9,10 @@ let getWeather = function(date, area=2, pref='02'){
   let request = require('request');
   let parseString = require('xml2js').parseString;
   
-  let url = 'https://www.drk7.jp/weather/xml/' + pref + '.xml';
+
   //ここがXMLパーサ
-  let tenki = request(url, function (error, response, body) {
+  const promise = new Primise((request, reject) => {
+    request (url, function (error, response, body) {
     if (!error && response.statusCode == 200) {
       parseString(body, function (err, result) {
       // [現時点では]今日の日付に一致する天気を取得。
@@ -27,7 +28,6 @@ let getWeather = function(date, area=2, pref='02'){
             
             //今は青森だけど[TODO]
             var tenki = "ハメドリくんだハメ。青森の天気予報だハメ\n" + day + weather + detail + max + min;
-            callback(null, tenki);
           }
         }
       });
@@ -35,10 +35,12 @@ let getWeather = function(date, area=2, pref='02'){
       console.log(error + " : " + response);
     }
   });
-  return tenki;
 };
 
 // exports
 module.exports = {
   getWeather: getWeather
 };
+
+const promise = new Promise((resolve, reject) => resolve()); // Promiseを作成し、終了する
+promise.then(() => console.log('done!')); // Promiseが終了したら「done!」と表示する
