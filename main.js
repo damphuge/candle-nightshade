@@ -209,7 +209,7 @@ client.on('message', message =>
     
         // そのチェンネルにメッセージを送信する
         
-         var image = "http://hall.gaia-jp.com/sp/gdrawmb.php?st=aom&dt=y&mno=" + result;
+         var image = "http://hall.gaia-jp.com/sp/gdrawmb.php?st=aom&dt=t&mno=" + result;
          console.log(image);
          message.reply("メガガイアはデータ偽装してるから信用するなハメ",{files: [{ attachment: image, name: "okd.png" }]});
         return;
