@@ -207,8 +207,10 @@ client.on('message', message =>
         let author = message.author.username;
     
         // そのチェンネルにメッセージを送信する
-        //message.reply("ｼﾞｬﾝｼﾞｬﾝﾊﾞﾘﾊﾞﾘ。。。",{files: [{ attachment: "http://hall.gaia-jp.com/sp/gdrawmb.php?st=aom&dt=y&mno="+result}]});
-        client.send_file(message.channel, "http://hall.gaia-jp.com/sp/gdrawmb.php?st=aom&dt=y&mno="+result);
+        
+         var image = "http://hall.gaia-jp.com/sp/gdrawmb.php?st=aom&dt=y&mno=" + result;
+    console.log(image);
+        channel.send('pong', { file: { attachment: image } });
         return;
     }
 });
