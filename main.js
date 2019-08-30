@@ -201,19 +201,7 @@ client.on('message', message =>
   
   var client = require('cheerio-httpcli');
  
-client.fetch('http://www.yahoo.co.jp')
-.then(function (result) {
-    var $ = result.$;
-    $('.topicsindex .emphasis a').each(function (idx) {
-        var title = $(this).contents().filter(function () {return this.nodeType === 3;}).text(),
-            url = $(this).attr('href');
- 
-        console.log(title + ',' + url);
-    });
-})
-.catch(function (error) {
-    console.log(error);
-});
+
   
   
     //メガガイア
@@ -226,14 +214,30 @@ client.fetch('http://www.yahoo.co.jp')
         let author = message.author.username;
     
         // そのチェンネルにメッセージを送信する
-        
+          var url ="http://hall.gaia-jp.com/sp/mb/playdatas/sdetail?st=aom&rb=S20&mno=" + result;
+          mega(url);
          var image = "http://hall.gaia-jp.com/sp/gdrawmb.php?st=aom&dt=t&mno=" + result;
+    
          console.log(image);
          message.reply("メガガイアはデータ偽装してるから信用するなハメ",{files: [{ attachment: image, name: "okd.png" }]});
         return;
     } 
-  function test(){
-    console.log();
+  function mega(url){
+    
+    var client = require('cheerio-httpcli');
+ 
+// Googleで「node.js」について検索する。
+var word = 'node.js';
+ 
+client.fetch('http://www.google.com/search', { q: word }, function (err, $, res, body) {
+  // レスポンスヘッダを参照
+  console.log(res.headers);
+ 
+  // HTMLタイトルを表示
+  console.log($('.b').text());
+ 
+});
+    
   }
   
 });
