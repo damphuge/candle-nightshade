@@ -16,6 +16,7 @@ http.createServer(function(request, response)
 // Discord bot implements
 const discord = require('discord.js');
 const client = new discord.Client();
+var ch = require('cheerio-httpcli'); 
 
 /*
 var tenki;
@@ -70,7 +71,7 @@ client.on('message', message =>
   if (message.author.bot) return;
   
   //メンション
-	if(message.isMemberMentioned(client.user))
+if(message.isMemberMentioned(client.user))
 	{
 		message.reply( 'やりますねぇ！' );
     console.log("test");
@@ -199,7 +200,6 @@ client.on('message', message =>
     }
   
   
-  var client = require('cheerio-httpcli');
  
 
   
@@ -222,14 +222,12 @@ client.on('message', message =>
          message.reply("メガガイアはデータ偽装してるから信用するなハメ",{files: [{ attachment: image, name: "okd.png" }]});
         return;
     } 
+      
   function mega(url){
     
-    var client = require('cheerio-httpcli');
  
-// Googleで「node.js」について検索する。
-var word = 'node.js';
  
-client.fetch('http://www.google.com/search', { q: word }, function (err, $, res, body) {
+ch.fetch('http://www.google.com/search',function (err, $, res, body) {
   // レスポンスヘッダを参照
   console.log(res.headers);
  
