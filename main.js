@@ -106,7 +106,8 @@ client.on('message', message =>
     let channel = message.channel;
     let author = message.author.username;
     // そのチェンネルにメッセージを送信する
-    message.reply(Airi.getWeather(message,date_request));
+    //message.reply(Airi.getWeather(message,date_request));
+    message.reply('長崎は今日も雨だった');
     return;
   }
   //メッセージの文字列による条件分岐
