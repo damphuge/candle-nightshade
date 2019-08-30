@@ -203,7 +203,7 @@ if(message.isMemberMentioned(client.user))
  
 
   
-  
+  var info;
     //メガガイア
   if (message.content.includes("@mega")) {
       console.log("メガガイア");
@@ -215,7 +215,7 @@ if(message.isMemberMentioned(client.user))
     
         // そのチェンネルにメッセージを送信する
           var url ="http://hall.gaia-jp.com/sp/mb/playdatas/sdetail?st=aom&rb=S20&mno=" + result;
-         var info;
+         
          var image = "http://hall.gaia-jp.com/sp/gdrawmb.php?st=aom&dt=t&mno=" + result;
     
             ch.headers['User-Agent'] = 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/34.0.1847.131 Safari/537.36';
@@ -225,12 +225,12 @@ ch.fetch(url, { q: 'node.js'}, function (err, $, res) {
 
     // HTMLタイトルを表示
     //console.log($('title').text());
-var info = $('b').text();
+　　info = $('b').text();
     //console.log($('b').text());
   console.log(info);
-
+ message.reply(info+"だハメ！くそ台ハメねぇ",{files: [{ attachment: image, name: "okd.png" }]});
 });
-         message.reply("メガガイアはデータ偽装してるから信用するなハメ",{files: [{ attachment: image, name: "okd.png" }]});
+        
         return;
     } 
       
