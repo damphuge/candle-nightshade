@@ -1,13 +1,4 @@
 //起動は node main.js
-//nodemon を入れると自動化できる（nodemon　node.jsで検索）
-//uptime rebootは気にするな
-//基本的に保存してから自動起動するけどたまにしない
-//一度起動してからは5分後に絶対落ちる(それをuptaime rebootで無理やり起こしてる)
-//おめシスはいいぞ
-//おめシスはいいぞ
-//おめシスはいいぞ
-//おめシスはいいぞ
-//おめシスはいいぞ
 
 // Dateなどのやつ
 let util = require('./utilities.js');
@@ -181,9 +172,6 @@ client.on('message', message =>
         .then(message => console.log(`Sent message: ${reply_text}`))
         .catch(console.error);
   }
-  //は
-  //それ、utilities.js にクソコピペしてたからだ。すま
-  // 手元で作っておくわ
   //オーキド博士 
    if (message.content === 'オーキド博士') {
         console.log("オーキド博士");
@@ -193,7 +181,15 @@ client.on('message', message =>
         message.reply("text",{files: [{ attachment: "https://cdn.glitch.com/279b9a42-2a14-4625-a99c-585d8820443e%2Fokd.jpg?v=1567130070416", name: "okd.png" }]});
         return;
     }
-  
+   //アローラオーキド博士 
+   if (message.content === 'アローラオーキド博士') {
+        console.log("オーキド博士");
+        let channel = message.channel;
+        let author = message.author.username;
+        // そのチェンネルにメッセージを送信する
+        message.reply("ファッキュー・・・ぶち殺すぞ",{files: [{ attachment: "https://cdn.glitch.com/279b9a42-2a14-4625-a99c-585d8820443e%2Fa_okd.jpg?v=1567130077289", name: "okd.png" }]});
+        return;
+    }
 });
 
 if(process.env.DISCORD_BOT_TOKEN == undefined)
