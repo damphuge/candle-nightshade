@@ -227,13 +227,16 @@ if(message.isMemberMentioned(client.user))
     
  
  
-ch.fetch('http://www.google.com/search',function (err, $, res, body) {
-  // レスポンスヘッダを参照
-  console.log(body);
- 
-  // HTMLタイトルを表示
-  //console.log($('h3').text());
- 
+ch.headers['User-Agent'] = 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/34.0.1847.131 Safari/537.36';
+ch.fetch(url, { q: 'node.js'}, function (err, $, res) {
+    // レスポンスヘッダを参照
+// console.log(res.headers);
+
+    // HTMLタイトルを表示
+    //console.log($('title').text());
+
+    console.log($('body').text());
+
 });
     
   }
