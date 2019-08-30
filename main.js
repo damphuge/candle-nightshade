@@ -19,7 +19,7 @@ const client = new discord.Client();
 
 /*
 var tenki;
-
+ 
 //天気
 const prefAomori = '02'; // xmlファイルの番号
 const areaTsugaru = 2;   // xmlファイル内での地域番号
@@ -155,22 +155,22 @@ client.on('message', message =>
     }
   }
 
-  var id;//idを処理の外に置く
-      //タイマー
-  if (message.content.includes("@timer")) {
-    clearTimeout(id);//起動時に前回のidを消す・・・まて、ほかのやつも消える
-    var mystr =message.content;
-    var result = mystr.replace(/[^0-9]/g, '');
-    console.log(result);
-    message.reply("タイマースタート！"+result+"分");
-    var time= 60000 * result;
-    id = setTimeout(res, time);
-    function res(){
-      console.log("タイマーストップ");
-    message.reply("タイマーストップ！");
+//   var id;//idを処理の外に置く
+//       //タイマー
+//   if (message.content.includes("@timer")) {
+//     clearTimeout(id);//起動時に前回のidを消す・・・まて、ほかのやつも消える
+//     var mystr =message.content;
+//     var result = mystr.replace(/[^0-9]/g, '');
+//     console.log(result);
+//     message.reply("タイマースタート！"+result+"分");
+//     var time= 60000 * result;
+//     id = setTimeout(res, time);
+//     function res(){
+//       console.log("タイマーストップ");
+//     message.reply("タイマーストップ！");
 
-    }
-  }
+//     }
+//   }
   
   //usage
   if (message.content === '!usage') {
@@ -181,7 +181,7 @@ client.on('message', message =>
   }
   //オーキド博士 
    if (message.content === 'オーキド博士') {
-        console.log("オーキド博士"); 
+        console.log("オーキド博士");
         let channel = message.channel;
         let author = message.author.username;
         // そのチェンネルにメッセージを送信する
@@ -198,22 +198,22 @@ client.on('message', message =>
         return;
     }
   
-//     //メガガイア
-//   if (message.content.includes("@mega")) {
-//       console.log("メガガイア");
-//      　var mystr =message.content;
-//     　　var result = mystr.replace(/[^0-9]/g, '');
+    //メガガイア
+  if (message.content.includes("@mega")) {
+      console.log("メガガイア");
+     　var mystr =message.content;
+    　　var result = mystr.replace(/[^0-9]/g, '');
             
-//         let channel = message.channel;
-//         let author = message.author.username;
+        let channel = message.channel;
+        let author = message.author.username;
     
-//         // そのチェンネルにメッセージを送信する
+        // そのチェンネルにメッセージを送信する
         
-//          var image = "http://hall.gaia-jp.com/sp/gdrawmb.php?st=aom&dt=y&mno=" + result;
-//          console.log(image);
-//          message.reply("ファッキュー・・・ぶち殺すぞ",{files: [{ attachment: image, name: "okd.png" }]});
-//         return;
-//     }
+         var image = "http://hall.gaia-jp.com/sp/gdrawmb.php?st=aom&dt=y&mno=" + result;
+         console.log(image);
+         message.reply("メガガイアはデータ偽装してるから信用するなハメ",{files: [{ attachment: image, name: "okd.png" }]});
+        return;
+    } 
   
 });
 
