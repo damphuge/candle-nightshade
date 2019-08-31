@@ -3,7 +3,7 @@
 // Dateなどのやつ
 let util = require('./utilities.js');
 // 天気
-let Airi = require('./weatherRoidTypeA.js');
+//let Airi = require('./weatherRoidTypeA.js');
 
 // Response for Uptime Robot
 const http = require('http');

@@ -36,18 +36,16 @@ log4js.configure({
   - JavaScriptでゼロパディングして桁をそろえる方法
     - https://so-zou.jp/web-app/tech/programming/javascript/grammar/data-type/string/zero-padding.htm
 
-  @param String $relativeEx 一昨日、昨日、今日、明日、明後日
+  @param String $relativeEx 今日、明日、明後日などの相対日付表現
   @return String $date YYYY/MM/DD形式の日付
 */
-
-
 let getRelativeDate = function(relativeEx) {
   // import
   const { addDays } = require('date-fns');
   const { convertToTimeZone } = require('date-fns-timezone');
   
   // 相対日付を定義
-  const relativeDate = {'一昨日':-2, '昨日': -1, '今日': 0, '明日': 1, '明後日': 2};
+  const relativeDate = {'今日': 0, '明日': 1, '明後日': 2, '明々後日': 3};
   relativeDate["本日"] = 0;
   
   // タイムゾーン定義

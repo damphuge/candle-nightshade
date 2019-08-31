@@ -5,6 +5,7 @@
   @return String $tenki 天気予報ハメ。マンコかっぽじってよく聞くハメ。
 */
 let povBird = function(result) {
+  console.log(result);
   let day = result['$'].date + "\n";
   let weather = result.weather[0] + "\n";
   let detail = result.weather_detail[0] + "\n";
@@ -31,22 +32,28 @@ let getWeather = function(date, area=2, pref='02'){
   //ここがXMLパーサ
   request (url, function (error, response, body) {
     if (!error && response.statusCode == 200) {
-      let asyncParseString = function(body, date, area, pref) {
+      // JavaScriptでasync/awaitに対応していない関数を対応させる
+      // -- Living Absurd World
+      // https://blog.hmatoba.net/Article/168
+      let asyncParseString = (function(body, date, area, pref) {
         return new Promise(function (resolve, reject) {
+          // ここはわからん。写経した
           const options = {
             trim: true,
             explicitArray: false
           };
           parseString(body, function (err, result) {
-          // 日付に一致する天気を取得。
+            // 日付に一致する天気を取得。
             for(let i=0; i < 6; i++) {
+              console.log(date, area, pref); // DEBUG    
               if(result.weatherforecast.pref[0].area[area].info[i]['$'].date === date){
+                // resolveで日付一致した部分を返り値として渡している（はず）
                 resolve(result.weatherforecast.pref[0].area[area].info[i]);
                 } // if
             } // for
           }); // parseString()
         }); // Promise function()
-      }(body, date, area, pref) // asyncParseString() 即時関数にして実行
+      })(body, date, area, pref) // asyncParseString() 即時関数にして実行
       // ハメドリくんに解析結果を渡している（はず）
       return povBird(asyncParseString);
     } else {
@@ -55,11 +62,13 @@ let getWeather = function(date, area=2, pref='02'){
   }); // request()
 };
 
+
 function main(){
-   console.log('RUN' + getWeather('2019-09-01'));
+   console.log('RUN' + getWeather('2019/09/01'));
 }
 
 main();
+
 // exports
 module.exports = {
   getWeather: getWeather
