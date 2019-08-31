@@ -5,16 +5,17 @@
   @return String $tenki 天気予報ハメ。マンコかっぽじってよく聞くハメ。
 */
 let povBird = function(p) {
-  console.log(typeof(p) + '\n' + p);
-  let result = p[0];
-  let day = result['$'].date + "\n";
-  let weather = result.weather[0] + "\n";
-  let detail = result.weather_detail[0] + "\n";
-  let max = "最高気温は" + result.temperature[0].range[0]._ + "度ハメ\n";
-  let min = "最低気温は" + result.temperature[0].range[1]._ + "度ですハメ";
-  var tenki = "ハメドリくんだハメ。青森の天気予報だハメ\n";
-  tenki += day + weather + detail + max + min;      
-  return tenki;
+  p.then(()=> {
+    let result = p[0];
+    let day = result['$'].date + "\n";
+    let weather = result.weather[0] + "\n";
+    let detail = result.weather_detail[0] + "\n";
+    let max = "最高気温は" + result.temperature[0].range[0]._ + "度ハメ\n";
+    let min = "最低気温は" + result.temperature[0].range[1]._ + "度ですハメ";
+    var tenki = "ハメドリくんだハメ。青森の天気予報だハメ\n";
+    tenki += day + weather + detail + max + min;      
+    return tenki;
+  });
 };
 
 /*
@@ -37,7 +38,7 @@ let getWeather = function(date, area=2, pref='02'){
       // -- Living Absurd World
       // https://blog.hmatoba.net/Article/168
       let asyncParseString = (function(body, date, area, pref) {
-        return new Promise((resolve, reject)=>{
+        return new Promise(function(resolve, reject){
           // ここはわからん。写経した
           const options = {
             trim: true,
@@ -46,18 +47,16 @@ let getWeather = function(date, area=2, pref='02'){
           parseString(body, function (err, result) {
             // 日付に一致する天気を取得。
             for(let i=0; i < 6; i++) {
-              console.log(date, area, pref); // DEBUG    
               if(result.weatherforecast.pref[0].area[area].info[i]['$'].date === date){
                 // resolveで日付一致した部分を返り値として渡している（はず）
                 resolve(result.weatherforecast.pref[0].area[area].info[i]);
-                } // if
+              } // if
             } // for
           }); // parseString()
         }); // Promise function()
-      })(body, date, area, pref);// asyncParseString() 即時関数にして実行
+      })(body, date, area, pref); // asyncParseString() 即時関数にして実行
       // ハメドリくんに解析結果を渡している（はず）
-      let result = povBird(asyncParseString);
-      return result;
+      return povBird(asyncParseString);
     } else {
       console.log(error + " : " + response);
     }
