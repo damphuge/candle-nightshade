@@ -1,8 +1,8 @@
 /*
-  xmlファイルから天気情報を取得する関数
+  ハメドリくんのテキストを生成するハメ。
 
-  @param Array $result xmlデータ。特定日の天気情報が格納されている。
-  @return String $tenki ハメドリくんのご講説
+  @param Array $result 天気予報情報ハメ。マスかいてたくさん出てきたハメよ。
+  @return String $tenki 天気予報ハメ。マンコかっぽじってよく聞くハメ。
 */
 let povBird = function(result) {
   let day = result['$'].date + "\n";
@@ -13,14 +13,15 @@ let povBird = function(result) {
   var tenki = "ハメドリくんだハメ。青森の天気予報だハメ\n";
   tenki += day + weather + detail + max + min;      
   return tenki;
-}
+};
 
 /*
-  天気を教える関数
+  天気予報を教える関数
   
   @param String $date 日付(YYYY/MM/DD)
   @param Integer $area 地域(初期値は青森県津軽を想定), xmlファイル内の地域id
   @param String $pref 都道府県(初期値は青森県), xmlファイル名の番号
+  @return String povBird(asyncParseString) SCP-8585RECとの交信履歴
 */
 let getWeather = function(date, area=2, pref='02'){
   let request = require('request');
@@ -45,15 +46,20 @@ let getWeather = function(date, area=2, pref='02'){
             } // for
           }); // parseString()
         }); // Promise function()
-      }(body, date, area, pref) // asyncParseString()
+      }(body, date, area, pref) // asyncParseString() 即時関数にして実行
+      // ハメドリくんに解析結果を渡している（はず）
       return povBird(asyncParseString);
     } else {
       console.log(error + " : " + response);
     }
-
-  });
+  }); // request()
 };
 
+function main(){
+   console.log('RUN' + getWeather('2019-09-01'));
+}
+
+main();
 // exports
 module.exports = {
   getWeather: getWeather
