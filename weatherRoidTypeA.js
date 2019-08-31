@@ -5,8 +5,7 @@
   @return String $tenki 天気予報ハメ。マンコかっぽじってよく聞くハメ。
 */
 let povBird = function(p) {
-  p.then(()=> {
-    let result = p[0];
+  p.then((result)=> {
     let day = result['$'].date + "\n";
     let weather = result.weather[0] + "\n";
     let detail = result.weather_detail[0] + "\n";
@@ -14,6 +13,8 @@ let povBird = function(p) {
     let min = "最低気温は" + result.temperature[0].range[1]._ + "度ですハメ";
     var tenki = "ハメドリくんだハメ。青森の天気予報だハメ\n";
     tenki += day + weather + detail + max + min;      
+    // DEBUG
+    console.log(tenki);
     return tenki;
   });
 };
@@ -30,7 +31,6 @@ let getWeather = function(date, area=2, pref='02'){
   let request = require('request');
   let parseString = require('xml2js').parseString;
   let url = 'https://www.drk7.jp/weather/xml/' + pref + '.xml';
-  var result;
   //ここがXMLパーサ
   request (url, function (error, response, body) {
     if (!error && response.statusCode == 200) {

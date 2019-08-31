@@ -3,7 +3,7 @@
 // Dateなどのやつ
 let util = require('./utilities.js');
 // 天気
-//let Airi = require('./weatherRoidTypeA.js');
+let Airi = require('./weatherRoidTypeA.js');
 
 // Response for Uptime Robot
 const http = require('http');
@@ -17,45 +17,6 @@ http.createServer(function(request, response)
 const discord = require('discord.js');
 const client = new discord.Client();
 var ch = require('cheerio-httpcli'); 
-
-/*
-var tenki;
- 
-//天気
-const prefAomori = '02'; // xmlファイルの番号
-const areaTsugaru = 2;   // xmlファイル内での地域番号
-const today = util.getRelativeDate();
-
-var request = require('request');
-var parseString = require('xml2js').parseString;
-
-var url = 'https://www.drk7.jp/weather/xml/' + prefAomori + '.xml';
- //ここがXMLパーサ
-request(url, function (error, response, body) {
-    if (!error && response.statusCode == 200) {
-        parseString(body, function (err, result) {
-          // [現時点では]今日の日付に一致する天気を取得。
-          for(let i=0; i < 6; i++) {
-            if(result.weatherforecast.pref[0].area[areaTsugaru].info[i]['$'].date === today){
-              var day = result.weatherforecast.pref[0].area[areaTsugaru].info[i]['$'].date + "\n";
-              var weather = result.weatherforecast.pref[0].area[areaTsugaru].info[i].weather[0] + "\n";
-              var detail = result.weatherforecast.pref[0].area[areaTsugaru].info[i].weather_detail[0] + "\n";
-              var max = "最高気温は" + result.weatherforecast.pref[0].area[areaTsugaru].info[i].temperature[0].range[0]._ + "度ハメ\n";
-              var min = "最低気温は" + result.weatherforecast.pref[0].area[areaTsugaru].info[i].temperature[0].range[1]._ + "度ですハメ";
-            }
-          }
-          tenki = "ハメドリくんだハメ。青森の天気予報だハメ\n" + day + weather + detail + max + min;
- 
-          console.log(tenki);
- 
-        });
-    } else {
-        console.log(error + " : " + response);
-    }
- 
-});
-*/
-
 
 //ここからBOTの反応
 client.on('ready', message =>
@@ -101,14 +62,16 @@ if(message.isMemberMentioned(client.user))
         return;
     }
   //天気
-  if (message.content.match(/^.{2,3}の天気$/)) {
+  if (message.content.match(/^.{2,4}の天気$/)) {
     const date_request = util.getRelativeDate(message.content.replace(/の天気/, ''));
     console.log(date_request);
     let channel = message.channel;
     let author = message.author.username;
     // そのチェンネルにメッセージを送信する
-    //message.reply(Airi.getWeather(message,date_request));
-    message.reply('長崎は今日も雨だった');
+    let temp = Airi.getWeather(date_request);
+    console.log('main gets from Airi:\n' + temp);
+    message.reply(temp);
+    //message.reply('長崎は今日も雨だった');
     return;
   }
   //メッセージの文字列による条件分岐
