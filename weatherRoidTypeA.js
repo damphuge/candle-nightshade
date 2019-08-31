@@ -1,11 +1,12 @@
 /*
   ハメドリくんのテキストを生成するハメ。
 
-  @param Array $result 天気予報情報ハメ。マスかいてたくさん出てきたハメよ。
+  @param jPromise $p 天気予報情報ハメ。マスかいてたくさん出てきたハメよ。
   @return String $tenki 天気予報ハメ。マンコかっぽじってよく聞くハメ。
 */
-let povBird = function(result) {
-  console.log(result);
+let povBird = function(p) {
+  console.log(p);
+  let result = p[0];
   let day = result['$'].date + "\n";
   let weather = result.weather[0] + "\n";
   let detail = result.weather_detail[0] + "\n";
@@ -36,7 +37,7 @@ let getWeather = function(date, area=2, pref='02'){
       // -- Living Absurd World
       // https://blog.hmatoba.net/Article/168
       let asyncParseString = (function(body, date, area, pref) {
-        return new Promise(function (resolve, reject) {
+        return new Promise((resolve, reject)=>{
           // ここはわからん。写経した
           const options = {
             trim: true,
@@ -53,7 +54,7 @@ let getWeather = function(date, area=2, pref='02'){
             } // for
           }); // parseString()
         }); // Promise function()
-      })(body, date, area, pref) // asyncParseString() 即時関数にして実行
+      });// asyncParseString() 即時関数にして実行
       // ハメドリくんに解析結果を渡している（はず）
       return povBird(asyncParseString);
     } else {
