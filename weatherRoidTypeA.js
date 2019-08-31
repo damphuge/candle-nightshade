@@ -43,6 +43,3 @@ let getWeather = function(date, area=2, pref='02'){
 module.exports = {
   getWeather: getWeather
 };
-
-const promise = new Promise((resolve, reject) => resolve()); // Promiseを作成し、終了する
-promise.then(() => console.log('done!')); // Promiseが終了したら「done!」と表示する
