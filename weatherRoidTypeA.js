@@ -5,7 +5,7 @@
   @return String $tenki 天気予報ハメ。マンコかっぽじってよく聞くハメ。
 */
 let povBird = function(p) {
-  console.log(p);
+  console.log(typeof(p) + '\n' + p);
   let result = p[0];
   let day = result['$'].date + "\n";
   let weather = result.weather[0] + "\n";
@@ -54,9 +54,10 @@ let getWeather = function(date, area=2, pref='02'){
             } // for
           }); // parseString()
         }); // Promise function()
-      });// asyncParseString() 即時関数にして実行
+      })(body, date, area, pref);// asyncParseString() 即時関数にして実行
       // ハメドリくんに解析結果を渡している（はず）
-      return povBird(asyncParseString);
+      let result = povBird(asyncParseString);
+      return result;
     } else {
       console.log(error + " : " + response);
     }
