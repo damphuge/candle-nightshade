@@ -1,3 +1,5 @@
+var tenki;
+
 /*
   ハメドリくんのテキストを生成するハメ。
 
@@ -11,11 +13,8 @@ let povBird = function(p) {
     let detail = result.weather_detail[0] + "\n";
     let max = "最高気温は" + result.temperature[0].range[0]._ + "度ハメ\n";
     let min = "最低気温は" + result.temperature[0].range[1]._ + "度ですハメ";
-    var tenki = "ハメドリくんだハメ。青森の天気予報だハメ\n";
-    tenki += day + weather + detail + max + min;      
-    // DEBUG
-    console.log(tenki);
-    return tenki;
+    tenki = "ハメドリくんだハメ。青森の天気予報だハメ\n";
+    tenki += day + weather + detail + max + min;
   });
 };
 
@@ -56,20 +55,23 @@ let getWeather = function(date, area=2, pref='02'){
         }); // Promise function()
       })(body, date, area, pref); // asyncParseString() 即時関数にして実行
       // ハメドリくんに解析結果を渡している（はず）
-      return povBird(asyncParseString);
+      povBird(asyncParseString);
+      console.log(tenki);
+      return tenki;
     } else {
       console.log(error + " : " + response);
     }
   }); // request()
 };
 
-
+/*
 function main(){
    console.log('RUN' + getWeather('2019/09/01'));
 }
 
 main();
 
+*/
 // exports
 module.exports = {
   getWeather: getWeather

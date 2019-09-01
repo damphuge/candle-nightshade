@@ -68,11 +68,15 @@ if(message.isMemberMentioned(client.user))
     let channel = message.channel;
     let author = message.author.username;
     // そのチェンネルにメッセージを送信する
-    let temp = Airi.getWeather(date_request);
-    console.log('main gets from Airi:\n' + temp);
-    message.reply(temp);
-    //message.reply('長崎は今日も雨だった');
-    return;
+    let promise = new Promise((resolve, reject)=> {
+      let reply_text = Airi.getWeather(date_request);
+      if(reply_text){ resolve(reply_text); }
+      else { reject(); }
+    });
+    
+    promise
+      .then((reply_text)=> { message.reply(reply_text); })
+      .catch(()=> { message.reply('長崎は今日も雨だった'); });
   }
   //メッセージの文字列による条件分岐
     if (message.content === 'タイマー') {
