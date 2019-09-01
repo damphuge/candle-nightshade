@@ -1,5 +1,3 @@
-var tenki;
-
 /*
   ハメドリくんのテキストを生成するハメ。
 
@@ -7,14 +5,18 @@ var tenki;
   @return String $tenki 天気予報ハメ。マンコかっぽじってよく聞くハメ。
 */
 let povBird = function(p) {
-  p.then((result)=> {
-    let day = result['$'].date + "\n";
-    let weather = result.weather[0] + "\n";
-    let detail = result.weather_detail[0] + "\n";
-    let max = "最高気温は" + result.temperature[0].range[0]._ + "度ハメ\n";
-    let min = "最低気温は" + result.temperature[0].range[1]._ + "度ですハメ";
-    tenki = "ハメドリくんだハメ。青森の天気予報だハメ\n";
-    tenki += day + weather + detail + max + min;
+  var tenki = "ハメドリくんだハメ。青森の天気予報だハメ\n";
+  p
+    .then((result)=> {
+      let day = result['$'].date + "\n";
+      let weather = result.weather[0] + "\n";
+      let detail = result.weather_detail[0] + "\n";
+      let max = "最高気温は" + result.temperature[0].range[0]._ + "度ハメ\n";
+      let min = "最低気温は" + result.temperature[0].range[1]._ + "度ですハメ";
+      tenki += day + weather + detail + max + min;
+      console.log('0' + (typeof tenki === 'undefined'));
+      console.log(tenki);
+      return tenki;
   });
 };
 
@@ -55,9 +57,9 @@ let getWeather = function(date, area=2, pref='02'){
         }); // Promise function()
       })(body, date, area, pref); // asyncParseString() 即時関数にして実行
       // ハメドリくんに解析結果を渡している（はず）
-      povBird(asyncParseString);
-      console.log(tenki);
-      return tenki;
+      let hoge = povBird(asyncParseString);
+      console.log('2'+(typeof hoge === 'undefined'));
+      return hoge;
     } else {
       console.log(error + " : " + response);
     }
