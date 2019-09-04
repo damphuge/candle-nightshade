@@ -3,7 +3,7 @@
 // Dateなどのやつ
 let util = require('./utilities.js');
 // 天気
-let Airi = require('./weatherRoidTypeA.js');
+//let Airi = require('./weatherRoidTypeA.js');
 
 // Response for Uptime Robot
 const http = require('http');
@@ -68,15 +68,15 @@ if(message.isMemberMentioned(client.user))
     let channel = message.channel;
     let author = message.author.username;
     // そのチェンネルにメッセージを送信する
-    let promise = new Promise((resolve, reject)=> {
-      let reply_text = Airi.getWeather(date_request);
-      if(reply_text){ resolve(reply_text); }
-      else { reject(); }
-    });
+ //   let promise = new Promise((resolve, reject)=> {
+  //    let reply_text = Airi.getWeather(date_request);
+  //    if(reply_text){ resolve(reply_text); }
+ //     else { reject(); }
+//    });
     
-    promise
-      .then((reply_text)=> { message.reply(reply_text); })
-      .catch(()=> { message.reply('長崎は今日も雨だった'); });
+//    promise
+//      .then((reply_text)=> { message.reply(reply_text); })
+//      .catch(()=> { message.reply('長崎は今日も雨だった'); });
   }
   //メッセージの文字列による条件分岐
     if (message.content === 'タイマー') {
