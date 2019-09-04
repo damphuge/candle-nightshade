@@ -1,7 +1,7 @@
 /*
   ハメドリくんのテキストを生成するハメ。
 
-  @param jPromise $p 天気予報情報ハメ。マスかいてたくさん出てきたハメよ。
+  @param Promise $p 天気予報情報ハメ。マスかいてたくさん出てきたハメよ。
   @return String $tenki 天気予報ハメ。マンコかっぽじってよく聞くハメ。
 */
 let povBird = function(p) {
