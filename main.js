@@ -167,6 +167,7 @@ if(message.isMemberMentioned(client.user))
     }
   
   
+  var sai = require('./sai.js'); 
  
 
   
