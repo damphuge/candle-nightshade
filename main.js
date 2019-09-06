@@ -38,20 +38,7 @@ if(message.isMemberMentioned(client.user))
     console.log("test");
 		return;
 	}
-  //さいころ
-    if (message.content === 'さいころ') {
-        console.log("test");
-        let channel = message.channel;
-        let author = message.author.username;
-        var num = Math.floor( Math.random() * 6 + 1 ) ;
-        let reply_text = `${author}のさいころの出目は`+ num;
 
-        // そのチェンネルにメッセージを送信する
-        message.reply(reply_text)
-            .then(message => console.log(`Sent message: ${reply_text}`))
-            .catch(console.error);
-        return;
-    }
   //日本地図
     if (message.content === 'にほん') {
         console.log("にほん");
@@ -160,7 +147,7 @@ if(message.isMemberMentioned(client.user))
   
   //さいころv2
   var sai = require('./sai.js'); 
-     if (message.content === 'sai') {
+     if (message.content === 'さいころ') {
        console.log("test");
         sai.test(message);
         return;
