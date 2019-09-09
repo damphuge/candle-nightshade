@@ -78,7 +78,6 @@ let getWeather = (function(weathers, date, area, pref) {
         resolve(result.area[area].info[day]);
       }
     }
-    reject();
   });
 });
 
@@ -92,17 +91,21 @@ let povBird = (function (weather) {
   return new Promise(function (resolve, reject) {
     var singing = "ハメドリくんだハメ。青森の天気予報だハメ\n";
     let day = weather['$'].date + "\n";
+    console.log(day);
     let sky = weather.weather[0] + "\n";
-    let detail = weather.weather_detail[0] + "\n";
+    console.log(sky);
+    let detail = ('weather_detail' in weather ? weather.weather_detail[0]: ' ') + "\n";
     let max = "最高気温は" + weather.temperature[0].range[0]._ + "度ハメ\n";
     let min = "最低気温は" + weather.temperature[0].range[1]._ + "度ですハメ";
-    singing += day + sky + detail + max + min;
+    singing += day + sky + detail+ max + min;
     
     if(day === undefined){
       console.log("reject");
       reject();
     }
-    else { resolve(singing); }
+    else { 
+      console.log(singing);
+      resolve(singing); }
   });
 });
 
