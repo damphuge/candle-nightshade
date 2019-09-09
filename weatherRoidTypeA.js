@@ -14,9 +14,11 @@ let asyncRequest = (function (options) {
   return new Promise(function (resolve, reject) {
     request(options, function (error, response, body) {
       if(!error && response.statusCode == 200) {
+        console.log("asyncRequest: resolve");
         resolve(body);
       }
       else {
+        console.log("asyncRequest: reject");
         reject(error);
       }
     });
@@ -42,9 +44,11 @@ let asyncParseString = (function (body) {
     };
     parseString(body, function (error, result) {
       if(!error) {
+        console.log("asyncParseString: resolve");
         resolve(result);
       }
       else {
+        console.log("asyncParseString: reject");
         reject(error);
       }
     });
@@ -60,14 +64,18 @@ let asyncParseString = (function (body) {
  * @param String pref 01-47
  * @return json weather a day weather forecast for 1 region.
  */
-async function getWeather(weathers, date, area, pref) {
-  for (let day=0; day<6; day++) {
-    if (weathers.weatherforecast.pref[pref].area[area].info[day]['$'].date === date) {
-      // resolveで日付一致した部分を返り値として渡している（はず）
-      return weathers.weatherforecast.pref[pref].area[area].info[day];
+let getWeather = (function(weathers, date, area, pref) {
+  return new Promise(function (resolve, reject) {
+    for (let day=0; day<6; day++) {
+      if (weathers.weatherforecast.pref[pref].area[area].info[day]['$'].date == date) {
+        // resolveで日付一致した部分を返り値として渡している（はず）
+        console.log("getWeather: resolve");
+        resolve(weathers.weatherforecast.pref[pref].area[area].info[day]);
+      }
+      reject();
     }
-  }
-}
+  });
+});
 
 /**
  * ハメドリくんのテキストを生成するハメ。
@@ -75,20 +83,22 @@ async function getWeather(weathers, date, area, pref) {
  * @param json weather お天気を受信するハメ！
  * @return String singing ハメドリくんのさえずりハメ！パコパコハメ～！
  */
-async function povBird(weather) {
-  var singing = "ハメドリくんだハメ。青森の天気予報だハメ\n";
-  let day = weather['$'].date + "\n";
-  let sky = weather.weather[0] + "\n";
-  let detail = weather.weather_detail[0] + "\n";
-  let max = "最高気温は" + weather.temperature[0].range[0]._ + "度ハメ\n";
-  let min = "最低気温は" + weather.temperature[0].range[1]._ + "度ですハメ";
-  singing += day + sky + detail + max + min;
+let povBird = (function (weather) {
+  return new Promise(function (resolve, reject) {
+    var singing = "ハメドリくんだハメ。青森の天気予報だハメ\n";
+    let day = weather['$'].date + "\n";
+    let sky = weather.weather[0] + "\n";
+    let detail = weather.weather_detail[0] + "\n";
+    let max = "最高気温は" + weather.temperature[0].range[0]._ + "度ハメ\n";
+    let min = "最低気温は" + weather.temperature[0].range[1]._ + "度ですハメ";
+    singing += day + sky + detail + max + min;
 
-  console.log('0' + (typeof singing === 'undefined'));
-  console.log(singing);
+    console.log('0' + (typeof singing === 'undefined'));
+    console.log(singing);
 
-  return singing;
-}
+    resolve(singing);
+  });
+});
 
 let TypeA = (async function(date, area=2, pref='02') {
   const options = {
