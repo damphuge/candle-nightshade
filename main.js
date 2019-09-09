@@ -152,7 +152,14 @@ if(message.isMemberMentioned(client.user))
         sai.test(message);
         return;
     }
-
+  
+//kirito
+  var kirito = require('./kirito.js'); 
+     if (message.content === 'kirito') {
+       console.log("kirito");
+        kirito.test(message);
+        return;
+    }
   
   var info;
     //メガガイア
