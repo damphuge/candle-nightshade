@@ -66,15 +66,15 @@ let asyncParseString = (function (body) {
  */
 let getWeather = (function(weathers, date, area, pref) {
   return new Promise(function (resolve, reject) {
+    const tmp = weathers.weatherforecast.pref;
+    // tmp -> [ {id: 1}, {name: 'me'} ]
+    // result -> {id: 1, name:'me'}
+    const result = tmp.reduce((l,r) => Object.assign(l, r), {});
     for (let day=0; day<6; day++) {
-      const tmp = weathers.weatherforecast.pref;
-      // tmp -> [ {id: 1}, {name: 'me'} ]
-      // result -> {id: 1, name:'me'}
-      const result = tmp.reduce((l,r) => Object.assign(l, r), {});
-      console.log(result);
       if (result.area[area].info[day]['$'].date === date) {
         // resolveで日付一致した部分を返り値として渡している（はず）
         console.log("getWeather: " + pref + area + day );
+        console.log(result.area[area].info[day]);
         resolve(result.area[area].info[day]);
       }
       reject();
@@ -91,21 +91,19 @@ let getWeather = (function(weathers, date, area, pref) {
 let povBird = (function (weather) {
   return new Promise(function (resolve, reject) {
     var singing = "ハメドリくんだハメ。青森の天気予報だハメ\n";
-    let day = weather['$'].date + "\n";
+    //let day = weather['$'].date + "\n";
+    let day = new Date();
     let sky = weather.weather[0] + "\n";
     let detail = weather.weather_detail[0] + "\n";
     let max = "最高気温は" + weather.temperature[0].range[0]._ + "度ハメ\n";
     let min = "最低気温は" + weather.temperature[0].range[1]._ + "度ですハメ";
     singing += day + sky + detail + max + min;
 
-    console.log('0' + (typeof singing === 'undefined'));
-    console.log(singing);
-
     resolve(singing);
   });
 });
 
-let TypeA = (async function(date, area='2', pref='02') {
+let TypeA = (async function(date, area=2, pref='02') {
   const options = {
     url: "https://www.drk7.jp/weather/xml/" + pref + ".xml",
     method: 'POST',
@@ -115,11 +113,12 @@ let TypeA = (async function(date, area='2', pref='02') {
   const weathers = await asyncParseString(body);
   const weather = await getWeather(weathers, date, area, pref);
   const singing = await povBird(weather);
-  console.log(singing);
   return singing;
 });
 
 console.log(TypeA("2019/09/09"));
+console.log(TypeA("2019/09/10"));
+console.log(TypeA("2019/09/11"));
 /*
 function main(){
    console.log('RUN' + getWeather('2019/09/01'));
