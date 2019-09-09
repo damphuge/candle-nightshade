@@ -89,17 +89,14 @@ async function povBird(weather) {
   return singing;
 }
 
-async function TypeA(date, area=2, pref='02') {
+let TypeA = (async function(date, area=2, pref='02') {
   const body = await asyncRequest(options);
   const weathers = await asyncParseString(body);
   const weather = await getWeather(weathers, date, area, pref);
   const singing = await povBird(weather);
   return singing;
-};
+});
 
-let main = function(date, area=2, pref='02') {
-  return TypeA(date, area, pref);
-}
 /*
 function main(){
    console.log('RUN' + getWeather('2019/09/01'));
@@ -110,5 +107,5 @@ main();
 */
 // exports
 module.exports = {
-  main: main
-};
+  TypeA: TypeA
+}
