@@ -77,8 +77,8 @@ let getWeather = (function(weathers, date, area, pref) {
         console.log(result.area[area].info[day]);
         resolve(result.area[area].info[day]);
       }
-      reject();
     }
+    reject();
   });
 });
 
@@ -91,15 +91,18 @@ let getWeather = (function(weathers, date, area, pref) {
 let povBird = (function (weather) {
   return new Promise(function (resolve, reject) {
     var singing = "ハメドリくんだハメ。青森の天気予報だハメ\n";
-    //let day = weather['$'].date + "\n";
-    let day = new Date();
+    let day = weather['$'].date + "\n";
     let sky = weather.weather[0] + "\n";
     let detail = weather.weather_detail[0] + "\n";
     let max = "最高気温は" + weather.temperature[0].range[0]._ + "度ハメ\n";
     let min = "最低気温は" + weather.temperature[0].range[1]._ + "度ですハメ";
     singing += day + sky + detail + max + min;
-
-    resolve(singing);
+    
+    if(day === undefined){
+      console.log("reject");
+      reject();
+    }
+    else { resolve(singing); }
   });
 });
 
@@ -109,6 +112,7 @@ let TypeA = (async function(date, area=2, pref='02') {
     method: 'POST',
     json: true,
   };
+  process.on('unhandledRejection', console.dir);
   const body = await asyncRequest(options);
   const weathers = await asyncParseString(body);
   const weather = await getWeather(weathers, date, area, pref);
@@ -116,17 +120,6 @@ let TypeA = (async function(date, area=2, pref='02') {
   return singing;
 });
 
-console.log(TypeA("2019/09/09"));
-console.log(TypeA("2019/09/10"));
-console.log(TypeA("2019/09/11"));
-/*
-function main(){
-   console.log('RUN' + getWeather('2019/09/01'));
-}
-
-main();
-
-*/
 // exports
 module.exports = {
   TypeA: TypeA
