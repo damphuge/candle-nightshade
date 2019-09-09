@@ -67,9 +67,10 @@ let asyncParseString = (function (body) {
 let getWeather = (function(weathers, date, area, pref) {
   return new Promise(function (resolve, reject) {
     for (let day=0; day<6; day++) {
-      if (weathers.weatherforecast.pref[pref].area[area].info[day]['$'].date == date) {
+      console.log(weathers.weatherforecast);
+      if (weathers.weatherforecast.pref[pref].area[area].info[day]['$'].date === date) {
         // resolveで日付一致した部分を返り値として渡している（はず）
-        console.log("getWeather: resolve");
+        console.log("getWeather: " + pref + area + day );
         resolve(weathers.weatherforecast.pref[pref].area[area].info[day]);
       }
       reject();
@@ -100,7 +101,7 @@ let povBird = (function (weather) {
   });
 });
 
-let TypeA = (async function(date, area=2, pref='02') {
+let TypeA = (async function(date, area='2', pref='02') {
   const options = {
     url: "https://www.drk7.jp/weather/xml/" + pref + ".xml",
     method: 'POST',
@@ -113,6 +114,7 @@ let TypeA = (async function(date, area=2, pref='02') {
   return singing;
 });
 
+console.log(TypeA("2019/09/09"));
 /*
 function main(){
    console.log('RUN' + getWeather('2019/09/01'));
