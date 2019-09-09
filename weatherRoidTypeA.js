@@ -65,6 +65,7 @@ async function getWeather(weathers, date, area, pref) {
     if (weathers.weatherforecast.pref[pref].area[area].info[day]['$'].date === date) {
       // resolveで日付一致した部分を返り値として渡している（はず）
       return weathers.weatherforecast.pref[pref].area[area].info[day];
+    }
   }
 }
 
@@ -76,11 +77,11 @@ async function getWeather(weathers, date, area, pref) {
  */
 async function povBird(weather) {
   var singing = "ハメドリくんだハメ。青森の天気予報だハメ\n";
-  let day = result['$'].date + "\n";
-  let sky = result.weather[0] + "\n";
-  let detail = result.weather_detail[0] + "\n";
-  let max = "最高気温は" + result.temperature[0].range[0]._ + "度ハメ\n";
-  let min = "最低気温は" + result.temperature[0].range[1]._ + "度ですハメ";
+  let day = weather['$'].date + "\n";
+  let sky = weather.weather[0] + "\n";
+  let detail = weather.weather_detail[0] + "\n";
+  let max = "最高気温は" + weather.temperature[0].range[0]._ + "度ハメ\n";
+  let min = "最低気温は" + weather.temperature[0].range[1]._ + "度ですハメ";
   singing += day + sky + detail + max + min;
 
   console.log('0' + (typeof singing === 'undefined'));
@@ -90,6 +91,11 @@ async function povBird(weather) {
 }
 
 let TypeA = (async function(date, area=2, pref='02') {
+  const options = {
+    url: "https://www.drk7.jp/weather/xml/" + pref + ".xml",
+    method: 'POST',
+    json: true,
+  };
   const body = await asyncRequest(options);
   const weathers = await asyncParseString(body);
   const weather = await getWeather(weathers, date, area, pref);
@@ -108,4 +114,4 @@ main();
 // exports
 module.exports = {
   TypeA: TypeA
-}
+};

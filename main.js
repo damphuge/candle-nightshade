@@ -3,7 +3,7 @@
 // Dateなどのやつ
 let util = require('./utilities.js');
 // 天気
-//let Airi = require('./weatherRoidTypeA.js');
+let Airi = require('./weatherRoidTypeA.js');
 
 // Response for Uptime Robot
 const http = require('http');
@@ -32,7 +32,7 @@ client.on('message', message =>
   if (message.author.bot) return;
   
   //メンション
-if(message.isMemberMentioned(client.user))
+  if(message.isMemberMentioned(client.user))
 	{
 		message.reply( 'やりますねぇ！' );
     console.log("test");
@@ -40,14 +40,14 @@ if(message.isMemberMentioned(client.user))
 	}
 
   //日本地図
-    if (message.content === 'にほん') {
-        console.log("にほん");
-        let channel = message.channel;
-        let author = message.author.username;
-        // そのチェンネルにメッセージを送信する
-        message.reply("text",{files: [{ attachment: "https://cdn.glitch.com/279b9a42-2a14-4625-a99c-585d8820443e%2Fmap-japan-10210.png?v=1566197317736", name: "test.png" }]});
-        return;
-    }
+  if (message.content === 'にほん') {
+    console.log("にほん");
+    let channel = message.channel;
+    let author = message.author.username;
+    // そのチェンネルにメッセージを送信する
+    message.reply("text",{files: [{ attachment: "https://cdn.glitch.com/279b9a42-2a14-4625-a99c-585d8820443e%2Fmap-japan-10210.png?v=1566197317736", name: "test.png" }]});
+    return;
+  }
   //天気
   if (message.content.match(/^.{2,4}の天気$/)) {
     const date_request = util.getRelativeDate(message.content.replace(/の天気/, ''));
@@ -55,16 +55,16 @@ if(message.isMemberMentioned(client.user))
     let channel = message.channel;
     let author = message.author.username;
     // そのチェンネルにメッセージを送信する
- //   let promise = new Promise((resolve, reject)=> {
-  //    let reply_text = Airi.getWeather(date_request);
-  //    if(reply_text){ resolve(reply_text); }
- //     else { reject(); }
-//    });
+    let promise = new Promise((resolve, reject)=> {
+      const reply_text = Airi.TypeA(date_request);
+      if(reply_text){ resolve(reply_text); }
+      else { reject(); }
+    });
     
-//    promise
-//      .then((reply_text)=> { message.reply(reply_text); })
-//      .catch(()=> { message.reply('長崎は今日も雨だった'); });
-  }
+    promise
+      .then((reply_text)=> { message.reply(reply_text); })
+      .catch(()=> { message.reply('長崎は今日も雨だった'); });
+}
   //メッセージの文字列による条件分岐
     if (message.content === 'タイマー') {
       
