@@ -1,10 +1,11 @@
 const youtube_alias_url = {
-  "るる": "https://www.youtube.com/channel/UC_a1ZYZ8ZTXpjg9xUY9sj8w/live",
-  "ロア": "https://www.youtube.com/channel/UCCVwhI5trmaSxfcze_Ovzfw",
-  "リゼ": "https://www.youtube.com/channel/UCZ1xuCK1kNmn5RzPYIZop3w/live",
-  "しいしい": "https://www.youtube.com/channel/UC_4tXjqecqox5Uc05ncxpxg/live"
+  "るる": "UC_a1ZYZ8ZTXpjg9xUY9sj8w",
+  "ロア": "UCCVwhI5trmaSxfcze_Ovzfw",
+  "リゼ": "UCZ1xuCK1kNmn5RzPYIZop3w",
+  "しいしい": "UC_4tXjqecqox5Uc05ncxpxg"
 }
 
+const token = process.env.YOUTUBE_TOKEN;
 /*
   Youtube LiveのURLを返信する。
   
