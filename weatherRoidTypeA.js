@@ -67,11 +67,15 @@ let asyncParseString = (function (body) {
 let getWeather = (function(weathers, date, area, pref) {
   return new Promise(function (resolve, reject) {
     for (let day=0; day<6; day++) {
-      console.log(weathers.weatherforecast);
-      if (weathers.weatherforecast.pref[pref].area[area].info[day]['$'].date === date) {
+      const tmp = weathers.weatherforecast.pref;
+      // tmp -> [ {id: 1}, {name: 'me'} ]
+      // result -> {id: 1, name:'me'}
+      const result = tmp.reduce((l,r) => Object.assign(l, r), {});
+      console.log(result);
+      if (result.area[area].info[day]['$'].date === date) {
         // resolveで日付一致した部分を返り値として渡している（はず）
         console.log("getWeather: " + pref + area + day );
-        resolve(weathers.weatherforecast.pref[pref].area[area].info[day]);
+        resolve(result.area[area].info[day]);
       }
       reject();
     }
@@ -111,6 +115,7 @@ let TypeA = (async function(date, area='2', pref='02') {
   const weathers = await asyncParseString(body);
   const weather = await getWeather(weathers, date, area, pref);
   const singing = await povBird(weather);
+  console.log(singing);
   return singing;
 });
 
