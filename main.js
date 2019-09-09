@@ -60,7 +60,12 @@ client.on('message', message =>
     else if (message.content.match(/^天気$/)) {
       date_request = util.getRelativeDate('今日');
       console.log(date_request);
-    }  
+    }
+    else if (message.content.match(/^天気の子$/)) {
+      const reply_text = "明日も晴れるよ！！！！";
+      message.reply(reply_text);
+      return;
+    }
     // そのチェンネルにメッセージを送信する
     let promise = (async function(date) {
       const reply_text = Airi.TypeA(date);

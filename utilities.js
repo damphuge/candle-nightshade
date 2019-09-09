@@ -47,6 +47,7 @@ let getRelativeDate = function(relativeEx) {
   // 相対日付を定義
   const relativeDate = {'今日': 0, '明日': 1, '明後日': 2, '明々後日': 3};
   relativeDate["本日"] = 0;
+  relativeDate["明明後日"] = 3;
   
   // タイムゾーン定義
   const timeZone = "Asia/Tokyo";
