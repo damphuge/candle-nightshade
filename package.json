@@ -7,6 +7,8 @@
     "cheerio-httpcli": "^0.7.4",
     "date-fns-timezone": "^0.1.4",
     "discord.js": "^11.5.1",
+    "google-auth-library": "^5.2.1",
+    "googleapis": "^43.0.0",
     "jquery": "^3.4.1",
     "request": "^2.88.0",
     "require": "^2.4.20",
