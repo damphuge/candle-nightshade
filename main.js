@@ -76,6 +76,33 @@ client.on('message', message =>
       .then((reply_text)=> { message.reply(reply_text); })
       .catch(()=> { message.reply('長崎は今日も雨だった'); });
   }
+  if (message.content === 'test weather') {
+    let channel = message.channel;
+    let author = message.author.username;
+    var date_request;
+    if (message.content.match(/^.{2,4}の天気$/)) {
+      date_request = util.getRelativeDate(message.content.replace(/の天気/, ''));
+      console.log(date_request);
+    }
+    else if (message.content.match(/^天気$/)) {
+      date_request = util.getRelativeDate('今日');
+      console.log(date_request);
+    }
+    else if (message.content.match(/^天気の子$/)) {
+      const reply_text = "明日も晴れるよ！！！！";
+      message.reply(reply_text);
+      return;
+    }
+    // そのチェンネルにメッセージを送信する
+    let promise = (async function(date) {
+      const reply_text = Airi.TypeA(date);
+      if(reply_text){ return reply_text; }
+    });
+
+    promise(date_request)
+      .then((reply_text)=> { message.reply(reply_text); })
+      .catch(()=> { message.reply('長崎は今日も雨だった'); });
+  }
 
   //メッセージの文字列による条件分岐
     if (message.content === 'タイマー') {
