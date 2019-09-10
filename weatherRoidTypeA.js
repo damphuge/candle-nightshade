@@ -98,21 +98,7 @@ let povBird = (function (weather) {
     let max = "最高気温は" + weather.temperature[0].range[0]._ + "度ハメ\n";
     let min = "最低気温は" + weather.temperature[0].range[1]._ + "度ですハメ";
     singing += day + sky + detail+ max + min;
-    
-    // Discord.jsでembed (埋め込みメッセージ) を扱う - Qiita:
-    // > https://qiita.com/nedew/items/4e0c20c1a89e983a6992
-    // weather-jsを使ってDiscordに天気を送る - Qiita: 
-    // > https://qiita.com/rqiuyong1/items/f51a7f5cc43372841f96
-    onst ymd = (weather['$'].date).split('/');
-    const singing = new Discord.MessageEmbed()
-      .setDescription(`${weather.weather[0]}だハメ\n` +
-        `${'weather_detail' in weather ? weather.weather_detail[0]: ' '}`)
-      .setTitle(`青森市の${ymd[1]}月${ymd[2]}日のお天気ハメ～！`)
-      .setThumbnail(weather.img)
-      .setColor(7506394)
-      .addField("最高気温", `${weather.temperature[0].range[0]._}度ハメ`, true)
-      .addField("最高気温", `${weather.temperature[0].range[1]._}度ですハメ`, true);
-    
+       
     
     if(day === undefined){
       console.log("reject");
