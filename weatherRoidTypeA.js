@@ -161,8 +161,7 @@ let TypeB = (async function(date, area=2, pref='02') {
   const body = await asyncRequest(options);
   const weathers = await asyncParseString(body);
   const weather = await getWeather(weathers, date, area, pref);
-  const singing = await povBirdEmbed(weather);
-  return singing;
+  return weather;
 });
 
 // exports

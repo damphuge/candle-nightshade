@@ -95,12 +95,12 @@ client.on('message', message =>
     }
     // そのチェンネルにメッセージを送信する
     let promise = (async function(date) {
-      const reply_text = Airi.TypeA(date);
+      const reply_text = Airi.TypeB(date);
       if(reply_text){ return reply_text; }
     });
-
+    
     promise(date_request)
-      .then((reply_text)=> { message.reply(reply_text); })
+      .then((reply_text)=> { message.channel.send(reply_text); })
       .catch(()=> { message.reply('長崎は今日も雨だった'); });
   }
 
