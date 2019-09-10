@@ -1,6 +1,5 @@
 let request = require('request');
 let parseString = require('xml2js').parseString;
-const discord = require('discord.js');
 
 /**
  * Asyncanize request()
@@ -111,31 +110,6 @@ let povBird = (function (weather) {
   });
 });
 
-let povBirdEmbed = (function (weather) {
-  return new Promise(function (resolve, reject) {
-    // Discord.jsでembed (埋め込みメッセージ) を扱う - Qiita:
-    // > https://qiita.com/nedew/items/4e0c20c1a89e983a6992
-    // weather-jsを使ってDiscordに天気を送る - Qiita: 
-    // > https://qiita.com/rqiuyong1/items/f51a7f5cc43372841f96
-    const ymd = (weather['$'].date).split('/');
-    const singing = new Discord.MessageEmbed()
-      .setDescription(`${weather.weather[0]}だハメ\n` +
-                       `${'weather_detail' in weather ? weather.weather_detail[0]: ' '}`)
-      .setTitle(`青森市の${ymd[1]}月${ymd[2]}日のお天気ハメ～！`)
-      .setThumbnail(weather.img)
-      .setColor(7506394)
-      .addField("最高気温", `${weather.temperature[0].range[0]._}度ハメ`, true)
-      .addField("最高気温", `${weather.temperature[0].range[1]._}度ですハメ`, true);   
-    
-    if(day === undefined){
-      console.log("reject");
-      reject();
-    }
-    else { 
-      console.log(singing);
-      resolve(singing); }
-  });
-});
 
 let TypeA = (async function(date, area=2, pref='02') {
   const options = {
@@ -151,21 +125,8 @@ let TypeA = (async function(date, area=2, pref='02') {
   return singing;
 });
 
-let TypeB = (async function(date, area=2, pref='02') {
-  const options = {
-    url: "https://www.drk7.jp/weather/xml/" + pref + ".xml",
-    method: 'POST',
-    json: true,
-  };
-  process.on('unhandledRejection', console.dir);
-  const body = await asyncRequest(options);
-  const weathers = await asyncParseString(body);
-  const weather = await getWeather(weathers, date, area, pref);
-  return weather;
-});
 
 // exports
 module.exports = {
-  TypeA: TypeA,
-  TypeB: TypeB
+  TypeA: TypeA
 };

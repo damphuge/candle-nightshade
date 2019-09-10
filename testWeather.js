@@ -1,5 +1,5 @@
 let Airi = require('./weatherRoidTypeA.js');
-var discord = require('discord.js');
+var Discord = require('discord.js');
 
 const result = Airi.TypeB("2019/09/11");
 console.log(result);
