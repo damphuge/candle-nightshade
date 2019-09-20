@@ -92,7 +92,7 @@ client.on('message', message =>
     }
   
     //　敗北者という単語が含まれていたときの処理
-  if (message.content.includes("敗北者")) {
+  if (message.content.includes(":test:")) {
     if (message.isMemberMentioned(client.user) && message.member.voiceChannel) {
       /* ボイスチャンネルにいる人がbotにメンションをしたときの処理 */
       message.member.voiceChannel
