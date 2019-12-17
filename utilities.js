@@ -40,42 +40,47 @@ log4js.configure({
   @return String $date YYYY/MM/DD形式の日付
 */
 let getRelativeDate = function(relativeEx) {
-  // import
-  const { addDays } = require('date-fns');
-  const { convertToTimeZone } = require('date-fns-timezone');
-  
-  // 相対日付を定義
-  const relativeDate = {'今日': 0, '明日': 1, '明後日': 2, '明々後日': 3};
-  relativeDate["本日"] = 0;
-  relativeDate["明明後日"] = 3;
-  
-  // タイムゾーン定義
-  const timeZone = "Asia/Tokyo";
-  // 現在時刻(UTC)を取得
-  const currentDate = new Date();
-  // TimeZone付きDateに変換
-  const zonedCurrentDate = convertToTimeZone(currentDate, { timeZone: timeZone });
-  let zonedTargetDate = zonedCurrentDate;
-  // 相対日付を取得
-  if(!relativeEx){ relativeEx = '今日'}
-  if(relativeEx in relativeDate){
-    zonedTargetDate = addDays(zonedCurrentDate, relativeDate[relativeEx]);
-  } else {
-    throw new Error(`${relativeEx} is not supported by getRelativeDate.`);
-  }
-  // 年月日を取得
-  const year = zonedTargetDate.getFullYear();
-  const month = zonedTargetDate.getMonth() + 1;
-  const day = zonedTargetDate.getDate();
-  // 書式をYYYY/MM/DDに変換
-  const date = year + '/' +
-        ('00' + month).slice(-2) + '/' +
-        ('00' + day).slice(-2);
-  
-  return date;
+    // import
+    const { addDays } = require('date-fns');
+    const { convertToTimeZone } = require('date-fns-timezone');
+    
+    // 相対日付を定義
+    const relativeDate = {
+        '今日': 0,
+        '明日': 1,
+        '明後日': 2,
+        '明々後日': 3,
+        '本日': 0,
+        '明明後日': 3
+    };
+    
+    // タイムゾーン定義
+    const timeZone = "Asia/Tokyo";
+    // 現在時刻(UTC)を取得
+    const currentDate = new Date();
+    // TimeZone付きDateに変換
+    const zonedCurrentDate = convertToTimeZone(currentDate, { timeZone: timeZone });
+    let zonedTargetDate = zonedCurrentDate;
+    // 相対日付を取得
+    if(!relativeEx){ relativeEx = '今日'}
+    if(relativeEx in relativeDate){
+        zonedTargetDate = addDays(zonedCurrentDate, relativeDate[relativeEx]);
+    } else {
+        throw new Error(`${relativeEx} is not supported by getRelativeDate.`);
+    }
+    // 年月日を取得
+    const year = zonedTargetDate.getFullYear();
+    const month = zonedTargetDate.getMonth() + 1;
+    const day = zonedTargetDate.getDate();
+    // 書式をYYYY/MM/DDに変換
+    const date = year + '/' +
+          ('00' + month).slice(-2) + '/' +
+          ('00' + day).slice(-2);
+    
+    return date;
 };
 
 // exports
 module.exports = {
-  getRelativeDate: getRelativeDate
+    getRelativeDate: getRelativeDate
 };
