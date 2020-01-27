@@ -182,7 +182,7 @@ client.on('message', message =>
         var mega = require('./mega.js');
         if (message.content.includes("@mega")) {
             console.log("メガガイア");
-            mega.mega_func(ch);
+            mega.mega_func(message,ch);
             return;
         }
 
