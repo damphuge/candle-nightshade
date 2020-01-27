@@ -1,5 +1,6 @@
-var url;
- function mega_func(ch) {
+  var info;
+
+ function mega_func(message,ch) {
 
    console.log("mega_new_runnnig");
 
