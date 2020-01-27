@@ -16,12 +16,12 @@ http.createServer(function(request, response)
 // Discord bot implements
 const discord = require('discord.js');
 const client = new discord.Client();
-var ch = require('cheerio-httpcli'); 
+var ch = require('cheerio-httpcli');
 
 //ここからBOTの反応
 client.on('ready', message =>
     {
-        client.user.setPresence({ game: { name: 'ぬきたし２' } });  
+        client.user.setPresence({ game: { name: 'ぬきたし２' } });
         console.log('bot is ready!');
     });
 
@@ -82,7 +82,7 @@ client.on('message', message =>
 
             console.log("time");
             var str = message.content;
-            str.match(/([+-]?[0-9]+\.?[0-9]*)/g); 
+            str.match(/([+-]?[0-9]+\.?[0-9]*)/g);
             //setTimeout(countup, 1000);
 
             let channel = message.channel;
@@ -146,7 +146,7 @@ client.on('message', message =>
                 .then(message => console.log(`Sent message: ${reply_text}`))
                 .catch(console.error);
         }
-        //オーキド博士 
+        //オーキド博士
         if (message.content === 'オーキド博士') {
             console.log("オーキド博士");
             let channel = message.channel;
@@ -163,7 +163,7 @@ client.on('message', message =>
 
 
         //さいころv2
-        var sai = require('./sai.js'); 
+        var sai = require('./sai.js');
         if (message.content === 'さいころ') {
             console.log("test");
             sai.test(message);
@@ -171,12 +171,21 @@ client.on('message', message =>
         }
 
         //kirito
-        var kirito = require('./kirito.js'); 
+        var kirito = require('./kirito.js');
         if (message.content === 'kirito') {
             console.log("kirito");
             kirito.test(message);
             return;
         }
+
+        //メガガイア
+        var mega = require('./mega.js');
+        if (message.content.includes("@mega")) {
+            console.log("メガガイア");
+            mega.mega_func(message);
+            return;
+        }
+
 
         var info;
         //メガガイア
@@ -207,7 +216,7 @@ client.on('message', message =>
             });
 
             return;
-        } 
+        }
 
 
 
