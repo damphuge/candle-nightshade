@@ -21,7 +21,7 @@
 
      var body;//hetml抜き出し
      body = $('body').html();
-    console.log(body.replace("&nbsp;", ""));
+    //console.log(body.replace("&nbsp;", ""));
      
      var name;
      
