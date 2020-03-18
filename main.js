@@ -197,6 +197,7 @@ client.on('message', message =>
 
         });
 
+require('dotenv').config();
 if(process.env.DISCORD_BOT_TOKEN == undefined)
 {
     console.log('please set ENV: DISCORD_BOT_TOKEN');
