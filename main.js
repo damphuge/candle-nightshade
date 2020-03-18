@@ -186,6 +186,14 @@ client.on('message', message =>
             kitagawa.kitagawa_func(message,ch);
             return;
         }
+  
+  //GB
+        var gb = require('./gb.js');
+        if (message.content.includes("@kita")) {
+            console.log("ジェネラルバトル");
+            gb.gb_func(message,ch);
+            return;
+        }
 
         });
 
