@@ -170,19 +170,28 @@ client.on('message', message =>
             return;
         }
 
-        //kirito
-        var kirito = require('./kirito.js');
-        if (message.content === 'kirito') {
-            console.log("kirito");
-            kirito.test(message);
-            return;
-        }
-
         //メガガイア
         var mega = require('./mega.js');
         if (message.content.includes("@mega")) {
             console.log("メガガイア");
             mega.mega_func(message,ch);
+            return;
+        }
+  
+  
+  //きたがわ
+        var kitagawa = require('./kitagawa.js');
+        if (message.content.includes("@kita")) {
+            console.log("きたがわ");
+            kitagawa.kitagawa_func(message,ch);
+            return;
+        }
+  
+  //GB
+        var gb = require('./gb.js');
+        if (message.content.includes("@kita")) {
+            console.log("ジェネラルバトル");
+            gb.gb_func(message,ch);
             return;
         }
 
