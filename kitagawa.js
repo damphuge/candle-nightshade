@@ -1,5 +1,3 @@
-const random = require('random');
-
 function kitagawa_func(message,ch) {
   //きたがわ
   const channel = message.channel;
@@ -21,7 +19,7 @@ function rand_text() {
     "おめんど最低だ！",
     "おめんどうしこら～！"
   ];
-  return random.choice(serifs);
+  return serifs[Math.floor(Math.random() * serifs.length)];
 }
 
 module.exports.kitagawa_func = kitagawa_func;
