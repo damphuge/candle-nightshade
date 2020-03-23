@@ -1,5 +1,14 @@
 const osmosis = require('osmosis');
-function fetchBounus() {
+
+/**
+ * ボーナス回数の取得
+ *
+ * @param {string} url
+ * @return {Array.<Object>} results - ボーナス回数の配列
+ *         {string} results[0].name - ボーナス名
+ *         {number} results[0].time - 回数
+ */
+function fetchBounus(url) {
   return new Promise((resolve, reject) => {
     let results = [];
     osmosis.get(url)
@@ -16,6 +25,14 @@ function fetchBounus() {
   });
 }
 
+/**
+ * 機種台情報の取得
+ *
+ * @param {string} url
+ * @return {Object} result - 台情報
+ *         {string} result.title - 機種名
+ *         {string} result.number - 台番号
+ */
 function fetchMachineInfo(url) {
   return new Promise((resolve, reject) => {
     let result = {}
@@ -33,28 +50,27 @@ function fetchMachineInfo(url) {
 async function constructResText(url) {
   const machine = await fetchMachineInfo(url)
   const bounuses = await fetchBounus(url)
-  return `${machine.title}（${machine.number}）\nBB: ${bounuses.find(x => x.name == 'RB').time}回, RB: ${bounuses.find(x => x.name == 'RB').time}回`
+  return `${machine.title}（${machine.number}）\nBB: ${bounuses.find(x => x.name == 'BB').time}回, RB: ${bounuses.find(x => x.name == 'RB').time}回`
 }
 
 function mega_osmosis(message, ch) {
   console.log("mega_new_runnnig");
 
   const mystr = message.content;
-  const result = mystr.replace(/[^0-9]/g, '');
+  const machineNumber = mystr.replace(/[^0-9]/g, '');
 
   const channel = message.channel;
   const author = message.author.username;
 
   // そのチェンネルにメッセージを送信する
-  const url ="http://hall.gaia-jp.com/sp/mb/playdatas/sdetail?st=aom&rb=S20&mno=" + result;
-  const image = "http://hall.gaia-jp.com/sp/gdrawmb.php?st=aom&dt=t&mno=" + result;
+  const firstHalfOfUrl = 'http://hall.gaia-jp.com';
+  const url = `${firstHalfOfUrl}/sp/mb/playdatas/sdetail?st=aom&rb=S20&mno=${machineNumber}`;
+  const image = `${firstHalfOfUrl}/sp/gdrawmb.php?st=aom&dt=t&mno=${machineNumber}`;
 
-  let res_text = ''
   constructResText(url).then((text) => {
-    res_text = text
+    console.log(text)
+    message.reply(text + "\n だハメ！どうせ改ざんハメ",{files: [{ attachment: image, name: "mega_data.png" }]});
   });
-  console.log(test)
-  message.reply(res_text + "\n だハメ！どうせ改ざんハメ",{files: [{ attachment: image, name: "mega_data.png" }]});
-  return;
 }
+
 module.exports.mega_func = mega_osmosis;
