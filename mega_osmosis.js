@@ -64,7 +64,7 @@ function mega_osmosis(message, ch) {
 
   // そのチェンネルにメッセージを送信する
   const firstHalfOfUrl = 'http://hall.gaia-jp.com';
-  const url = `${firstHalfOfUrl}/sp/mb/playdatas/sdetail?st=aom&rb=S20&mno=${machineNumber}`;
+  const url = `${firstHalfOfUrl}/sp/mb/playdatas/sdetail?st=aom&rb=S20&mno=${machineNumber}&rt=t`;
   const image = `${firstHalfOfUrl}/sp/gdrawmb.php?st=aom&dt=t&mno=${machineNumber}`;
 
   constructResText(url).then((text) => {
