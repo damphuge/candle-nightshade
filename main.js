@@ -171,15 +171,15 @@ client.on('message', message =>
         }
 
         //メガガイア
-        var mega = require('./mega.js');
-        if (message.content.includes("@mega")) {
-            console.log("メガガイア");
-            mega.mega_func(message,ch);
-            return;
+        var mega = require('./mega_osmosis.js');
+        const megaList = ['@mega', 'mega@'];
+        listIsMega = megaList.map(x => message.content.includes(x))
+        if(listIsMega.some(x=>x)){
+          console.log("メガガイア");
+          mega.mega_func(message,ch);
+          return;
         }
-  
-  
-  //きたがわ
+      //きたがわ
         var kitagawa = require('./kitagawa.js');
         if (message.content.includes("@kita")) {
             console.log("きたがわ");
