@@ -123,23 +123,6 @@ client.on('message', message =>
             }
         }
 
-        //   var id;//idを処理の外に置く
-        //   //タイマー
-        //   if (message.content.includes("@timer")) {
-        //   clearTimeout(id);//起動時に前回のidを消す・・・まて、ほかのやつも消える
-        //   var mystr =message.content;
-        //   var result = mystr.replace(/[^0-9]/g, '');
-        //   console.log(result);
-        //   message.reply("タイマースタート！"+result+"分");
-        //   var time= 60000 * result;
-        //   id = setTimeout(res, time);
-        //   function res(){
-        //   console.log("タイマーストップ");
-        //   message.reply("タイマーストップ！");
-
-        //   }
-        //   }
-
         //usage
         if (message.content === '!usage') {
             let reply_text = 'さいころ, 天気, にほん, @timer, 敗北者, メンション, オーキド博士（アローラのすがたもあるぞい）';
