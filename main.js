@@ -61,12 +61,12 @@ client.on('message', message =>
 	     let messe = message.content.slice(index + 1);
          message.reply(`処理中${messe}`);
         
-        // DBclient.connect()
+         DBclient.connect()
 
-        // DBclient.query(`SELECT message FROM messages WHERE word = '${messe}'`, (err, res) => {
-        //     message.reply(err, res);
-        //     DBclient.end()
-        // })
+         DBclient.query(`SELECT message FROM messages WHERE word = '${messe}'`, (err, res) => {
+             message.reply(err, res);
+             DBclient.end()
+         })
     }
     
 
