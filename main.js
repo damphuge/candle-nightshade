@@ -54,7 +54,7 @@ client.on('message', message =>
         }
 
        //!word
-       if(message.content.match(/\!word.*$/))
+       if(message.content.match(/!word.*$/))
        {
         let index   = str.indexOf(" ");
      	// ４．基準文字列から後の文字列を切り出して表示 
