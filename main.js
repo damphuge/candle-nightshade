@@ -72,7 +72,10 @@ client.on('message', message =>
             console.error(err);
             message.reply(`エラーしたわ。${err}`);
             return;
-          });
+          })
+          .finally( async()=> {
+            DBclient.release()
+            });
     }
       const addwordOperation = '!addword';
       if((new RegExp(`^${addwordOperation}`)).test(message.content)) {
