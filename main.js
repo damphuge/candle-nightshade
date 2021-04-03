@@ -56,16 +56,19 @@ client.on('message', message =>
        //!word
        if(message.content.match(/\!word.*$/))
        {
+        let index   = str.indexOf(" ");
+     	// ４．基準文字列から後の文字列を切り出して表示 
+	    let messe = message.content.slice(index + 1);
+
         con.connect((err, client) => {
             if (err) {
               console.log(err);
             } else {
-              client.query(`SELECT name FROM messages`, (err, result) => {
+              client.query(`SELECT message FROM messages WHERE word = '${messe}'`, (err, result) => {
                 console.log(result.rows);
               });
             }
-        message.reply( 'やりますねぇ！' );
-        console.log("test");
+        message.reply( result.rows );
         return;
        }
     )}
