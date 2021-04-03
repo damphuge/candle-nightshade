@@ -59,16 +59,19 @@ client.on('message', message =>
         let index   = str.indexOf(" ");
      	// ４．基準文字列から後の文字列を切り出して表示 
 	    let messe = message.content.slice(index + 1);
+        message.reply("処理中");
 
         con.connect((err, client) => {
             if (err) {
               console.log(err);
+              message.reply(err);
             } else {
               client.query(`SELECT message FROM messages WHERE word = '${messe}'`, (err, result) => {
                 console.log(result.rows);
+                message.reply(result.rows);
               });
             }
-        message.reply( result.rows );
+       
         return;
        }
     )}
