@@ -5,14 +5,18 @@ let util = require('./utilities.js');
 // 天気
 let Airi = require('./weatherRoidTypeA.js');
 
+
 //DB接続情報
-const DBconf = {
+const pg = require('pg');
+require('dotenv').config();
+
+const con = pg.Pool ({
     "host": process.env.ENV_HOST,
     "database": process.env.ENV_DB,
     "user": process.env.ENV_USER,
     "port": 5432,
     "password": process.env.ENV_PASSWORD,
-  };
+});
 
 // Response for Uptime Robot
 const http = require('http');
@@ -48,6 +52,24 @@ client.on('message', message =>
             console.log("test");
             return;
         }
+
+       //!word
+       if(message.content.match(/\!word.*$/))
+       {
+        con.connect((err, client) => {
+            if (err) {
+              console.log(err);
+            } else {
+              client.query(`SELECT name FROM messages`, (err, result) => {
+                console.log(result.rows);
+              });
+            }
+        message.reply( 'やりますねぇ！' );
+        console.log("test");
+        return;
+       }
+    )}
+    
 
         //日本地図
         if (message.content === 'にほん') {
