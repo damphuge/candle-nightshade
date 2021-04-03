@@ -53,30 +53,6 @@ client.on('message', message =>
             return;
         }
 
-       //!word
-       if(message.content.match(/^!word .*/))
-       {
-        let index   = str.indexOf(" ");
-     	// ４．基準文字列から後の文字列を切り出して表示 
-	    let messe = message.content.slice(index + 1);
-        message.reply("処理中");
-
-        con.connect((err, client) => {
-            if (err) {
-              console.log(err);
-              message.reply(err);
-            } else {
-              client.query(`SELECT message FROM messages WHERE word = '${messe}'`, (err, result) => {
-                console.log(result.rows);
-                message.reply(result.rows);
-              });
-            }
-       
-        return;
-       }
-    )}
-    
-
         //日本地図
         if (message.content === 'にほん') {
             console.log("にほん");
@@ -94,12 +70,6 @@ client.on('message', message =>
             let author = message.author.username;
             // そのチェンネルにメッセージを送信する
             message.reply("差別検知!!津波両夢は差別を許しません!",{files: [{ attachment: "https://cdn.discordapp.com/attachments/768317965800046602/827823207553040414/88808193_p0_master1200.jpg", name: "津波両夢.png" }]});
-            return;
-        }
-
-        //DB
-        if (message.content === 'DB') {
-            message.reply(DBconf.host);
             return;
         }
 
