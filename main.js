@@ -88,6 +88,10 @@ client.on('message', message =>
         console.log(matches);
         if (matches === null) {
           console.log(`${addwordOperation} 命令の形式にマッチしませんでした`);
+          message.reply(
+            'usage: `!addword 登録したいキーワード 登録したい説明文`\n' +
+            '※説明文に改行は対応していない。すまん'
+          );
           return;
         }
 
