@@ -49,6 +49,17 @@ client.on('message', message =>
             message.reply("text",{files: [{ attachment: "https://cdn.glitch.com/279b9a42-2a14-4625-a99c-585d8820443e%2Fmap-japan-10210.png?v=1566197317736", name: "test.png" }]});
             return;
         }
+
+        //お仕置き執行人津波両夢
+        if (message.content === '差別') {
+            console.log("差別");
+            let channel = message.channel;
+            let author = message.author.username;
+            // そのチェンネルにメッセージを送信する
+            message.reply("text",{files: [{ attachment: "https://cdn.discordapp.com/attachments/768317965800046602/827823207553040414/88808193_p0_master1200.jpg", name: "津波両夢.png" }]});
+            return;
+        }
+
         //天気
         if (message.content.match(/^.*天気.*$/)) {
             let channel = message.channel;
