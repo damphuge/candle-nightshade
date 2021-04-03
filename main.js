@@ -18,6 +18,8 @@ const con = pg.Pool ({
     "password": process.env.ENV_PASSWORD,
 });
 
+
+
 // Response for Uptime Robot
 const http = require('http');
 http.createServer(function(request, response)
@@ -52,6 +54,29 @@ client.on('message', message =>
             console.log("test");
             return;
         }
+
+       //!word
+       if(message.content.match(/^!word .*/)){
+        let index   = str.indexOf(" ");
+     	// ４．基準文字列から後の文字列を切り出して表示 
+	    let messe = message.content.slice(index + 1);
+        message.reply("処理中");
+
+        con.connect((err, client) => {
+            if (err) {
+              console.log(err);
+              message.reply(err);
+            } else {
+              client.query(`SELECT message FROM messages WHERE word = '${messe}'`, (err, result) => {
+                console.log(result.rows);
+                message.reply(result.rows);
+              });
+            }
+       
+        return;
+       }
+    )}
+    
 
         //日本地図
         if (message.content === 'にほん') {
