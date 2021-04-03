@@ -7,18 +7,15 @@ let Airi = require('./weatherRoidTypeA.js');
 
 
 //DB接続情報-
-const pg = require('pg');
-require('dotenv').config();
+const { Client } = require('pg')
 
-const con = pg.Pool ({
-    "host": process.env.ENV_HOST,
-    "database": process.env.ENV_DB,
-    "user": process.env.ENV_USER,
-    "port": 5432,
-    "password": process.env.ENV_PASSWORD,
-});
-
-
+const client = new Client({
+    user: 'process.env.ENV_USER',
+    host: 'process.env.ENV_HOST',
+    database: 'process.env.ENV_DB',
+    password: 'process.env.ENV_PASSWORD',
+    port: 5432,
+})
 
 // Response for Uptime Robot
 const http = require('http');
@@ -61,21 +58,14 @@ client.on('message', message =>
      	// ４．基準文字列から後の文字列を切り出して表示 
 	    let messe = message.content.slice(index + 1);
         message.reply("処理中");
+        
+        client.connect()
 
-        con.connect((err, client) => {
-            if (err) {
-              console.log(err);
-              message.reply(err);
-            } else {
-              client.query(`SELECT message FROM messages WHERE word = '${messe}'`, (err, result) => {
-                console.log(result.rows);
-                message.reply(result.rows);
-              });
-            }
-       
-        return;
-       }
-    )}
+        client.query(`SELECT message FROM messages WHERE word = '${messe}'`, (err, res) => {
+            message.reply(err, res);
+            client.end()
+        })
+    }
     
 
         //日本地図
