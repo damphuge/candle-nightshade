@@ -17,7 +17,7 @@ const dbConfig = {
     password: process.env.ENV_PASSWORD,
     port: 5432,
     ssl: {
-      rejectUnauthorized: false
+      rejectUnauthorized: process.env.DB_SSL
     }
 };
 
