@@ -73,7 +73,7 @@ client.on('message', message =>
           })
           .catch(err => {
             console.error(err);
-            message.reply(`エラーしたわ。${err}`);
+            message.reply(`エラーしたわ。${err} ${dbConfig}`);
             return;
           })
           .finally(()=> {
