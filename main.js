@@ -9,7 +9,7 @@ let Airi = require('./weatherRoidTypeA.js');
 //DB接続情報-
 const { Client } = require('pg')
 
-const client = new Client({
+const DBclient = new Client({
     user: 'process.env.ENV_USER',
     host: 'process.env.ENV_HOST',
     database: 'process.env.ENV_DB',
@@ -59,11 +59,11 @@ client.on('message', message =>
 	    let messe = message.content.slice(index + 1);
         message.reply("処理中");
         
-        client.connect()
+        DBclient.connect()
 
-        client.query(`SELECT message FROM messages WHERE word = '${messe}'`, (err, res) => {
+        DBclient.query(`SELECT message FROM messages WHERE word = '${messe}'`, (err, res) => {
             message.reply(err, res);
-            client.end()
+            DBclient.end()
         })
     }
     
