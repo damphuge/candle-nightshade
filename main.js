@@ -61,9 +61,11 @@ client.on('message', message =>
 	     let messe = message.content.slice(index + 1);
          message.reply(`処理中${messe}`);
         
-         DBclient.connect()
+         const client = new Client(dbConfig);
 
-         DBclient.query(`SELECT message FROM messages WHERE word = '${messe}'`)
+         client.connect()
+
+         client.query(`SELECT message FROM messages WHERE word = '${messe}'`)
          .then(res => {
             message.reply(res);
             return;
@@ -74,7 +76,7 @@ client.on('message', message =>
             return;
           })
           .finally( async()=> {
-            DBclient.release()
+            client.end();
             });
     }
       const addwordOperation = '!addword';
