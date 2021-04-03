@@ -78,7 +78,7 @@ client.on('message', message =>
             message.reply(`エラーしたわ。${err}`);
             return;
           })
-          .finally( async()=> {
+          .finally(()=> {
             client.end();
             });
     }
