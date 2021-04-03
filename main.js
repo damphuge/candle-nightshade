@@ -6,7 +6,7 @@ let util = require('./utilities.js');
 let Airi = require('./weatherRoidTypeA.js');
 
 
-//DB接続情報
+//DB接続情報-
 const pg = require('pg');
 require('dotenv').config();
 
