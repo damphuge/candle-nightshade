@@ -55,16 +55,17 @@ client.on('message', message =>
        //!word
        if(message.content.match(/^!word .*/)){
         let index   = str.indexOf(" ");
-     	// ４．基準文字列から後の文字列を切り出して表示 
-	    let messe = message.content.slice(index + 1);
-        message.reply("処理中");
         
-        DBclient.connect()
+     	 // ４．基準文字列から後の文字列を切り出して表示 
+	     let messe = message.content.slice(index + 1);
+         message.reply(`処理中${messe}`);
+        
+        // DBclient.connect()
 
-        DBclient.query(`SELECT message FROM messages WHERE word = '${messe}'`, (err, res) => {
-            message.reply(err, res);
-            DBclient.end()
-        })
+        // DBclient.query(`SELECT message FROM messages WHERE word = '${messe}'`, (err, res) => {
+        //     message.reply(err, res);
+        //     DBclient.end()
+        // })
     }
     
 
