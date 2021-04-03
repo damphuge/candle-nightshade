@@ -5,6 +5,9 @@ let util = require('./utilities.js');
 // 天気
 let Airi = require('./weatherRoidTypeA.js');
 
+//DB接続情報
+let DB = require('./connection.js');
+
 // Response for Uptime Robot
 const http = require('http');
 http.createServer(function(request, response)
@@ -57,6 +60,12 @@ client.on('message', message =>
             let author = message.author.username;
             // そのチェンネルにメッセージを送信する
             message.reply("差別検知!!津波両夢は差別を許しません!",{files: [{ attachment: "https://cdn.discordapp.com/attachments/768317965800046602/827823207553040414/88808193_p0_master1200.jpg", name: "津波両夢.png" }]});
+            return;
+        }
+
+        //DB
+        if (message.content === 'DB') {
+            message.reply(DB);
             return;
         }
 
