@@ -61,14 +61,12 @@ client.on('message', message =>
         let index   = message.content.indexOf(" ");
         
      	 // ４．基準文字列から後の文字列を切り出して表示 
-	     let messe = message.content.slice(index + 1);
-         message.reply(`処理中${messe}`);
-        
-         const client = new Client(dbConfig);
+	     let messe = message.content.slice(index + 1);        
+         const dbClient = new Client(dbConfig);
 
-         client.connect()
+         dbClient.connect()
 
-         client.query(`SELECT message FROM messages WHERE word = '${messe}'`)
+         dbClient.query(`SELECT message FROM messages WHERE word = '${messe}'`)
          .then(res => {
             message.reply(res);
             return;
@@ -79,7 +77,7 @@ client.on('message', message =>
             return;
           })
           .finally(()=> {
-            client.end();
+            dbClient.end();
             });
     }
       const addwordOperation = '!addword';
