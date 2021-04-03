@@ -63,10 +63,16 @@ client.on('message', message =>
         
          DBclient.connect()
 
-         DBclient.query(`SELECT message FROM messages WHERE word = '${messe}'`, (err, res) => {
-             message.reply(err, res);
-             DBclient.end()
-         })
+         DBclient.query(`SELECT message FROM messages WHERE word = '${messe}'`)
+         .then(res => {
+            message.reply(res);
+            return;
+          })
+          .catch(err => {
+            console.error(err);
+            message.reply(`エラーしたわ。原因は知らん`);
+            return;
+          });
     }
       const addwordOperation = '!addword';
       if((new RegExp(`^${addwordOperation}`)).test(message.content)) {
