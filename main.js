@@ -10,13 +10,16 @@ let Airi = require('./weatherRoidTypeA.js');
 //DB接続情報-
 const { Client } = require('pg')
 
-const DBclient = new Client({
+const dbConfig = {
     user: process.env.ENV_USER,
     host: process.env.ENV_HOST,
     database: process.env.ENV_DB,
     password: process.env.ENV_PASSWORD,
     port: 5432,
-})
+    ssl: {
+      rejectUnauthorized: false
+    }
+};
 
 // Response for Uptime Robot
 const http = require('http');
@@ -93,21 +96,25 @@ client.on('message', message =>
         const keyWord = matches[1];
         const keyDescription = matches[2];
 
-        DBclient.connect();
-        
-        DBclient.query(`INSERT INTO messages VALUES (${keyWord}, ${keyDescription})`)
-        .then(res => {
-          console.log(`Insert (${keyWord}: ${keyDescription})`);
-          message.reply(`追加しました. \`!word ${keyWord}\` で試してみてくれ`);
-          return;
-        })
-        .catch(err => {
-          console.error(err);
-          message.reply(`エラーしたわ。原因は知らん`);
-          return;
-        });
+        const insertQuery =`INSERT INTO messages (word, message) VALUES ('${keyWord}', '${keyDescription}')`;
+        console.log(`DB: ${insertQuery}`);
+
+        const dbClient = new Client(dbConfig)
+
+        dbClient.connect();
+        dbClient
+          .query(insertQuery)
+          .then(res => {
+            console.log(`Insert (${keyWord}: ${keyDescription})`);
+            message.reply(`追加しました. \`!word ${keyWord}\` で試してみてくれ`);
+          })
+          .catch(err => {
+            console.error(err);
+            message.reply(`エラーしたわ。原因は知らん`);
+          })
+          .finally(() => dbClient.end());
+        return;
       }
-    
 
         //日本地図
         if (message.content === 'にほん') {
