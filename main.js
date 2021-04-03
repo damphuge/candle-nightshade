@@ -6,7 +6,13 @@ let util = require('./utilities.js');
 let Airi = require('./weatherRoidTypeA.js');
 
 //DB接続情報
-let DB = require('./connection.js');
+const DBconf = {
+    "host": process.env.ENV_HOST,
+    "database": process.env.ENV_DB,
+    "user": process.env.ENV_USER,
+    "port": 5432,
+    "password": process.env.ENV_PASSWORD,
+  };
 
 // Response for Uptime Robot
 const http = require('http');
@@ -65,7 +71,7 @@ client.on('message', message =>
 
         //DB
         if (message.content === 'DB') {
-            message.reply(DB.host);
+            message.reply(DBconf.host);
             return;
         }
 
