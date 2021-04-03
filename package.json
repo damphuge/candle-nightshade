@@ -1,5 +1,5 @@
 {
-  "name": "glitch-discord-bot",
+  "name": "nara",
   "version": "0.0.0",
   "description": "discord bot sample on Glitch",
   "main": "main.js",
@@ -23,5 +23,14 @@
     "start": "node main.js",
     "test": "node main.js"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/damphuge/candle-nightshade.git"
+  },
+  "author": "",
+  "bugs": {
+    "url": "https://github.com/damphuge/candle-nightshade/issues"
+  },
+  "homepage": "https://github.com/damphuge/candle-nightshade#readme"
 }
