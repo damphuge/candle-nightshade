@@ -94,7 +94,10 @@ client.on('message', message =>
         const keyWord = matches[1];
         const keyDescription = matches[2];
 
-        const insertQuery =`INSERT INTO messages (word, message) VALUES ('${keyWord}', '${keyDescription}')`;
+        const constraintName = 'messages_word_key';
+        const insertQuery = `INSERT INTO messages (word, message) VALUES ('${keyWord}', '${keyDescription}')
+          ON CONFLICT ON CONSTRAINT ${constraintName}
+          DO UPDATE SET message='${keyDescription}'`;
         console.log(`DB: ${insertQuery}`);
 
         const dbClient = new Client(dbConfig)
