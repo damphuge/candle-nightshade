@@ -65,7 +65,7 @@ client.on('message', message =>
 
         //DB
         if (message.content === 'DB') {
-            message.reply(DB);
+            message.reply(DB.host);
             return;
         }
 
