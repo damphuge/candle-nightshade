@@ -8,7 +8,7 @@ let Airi = require('./weatherRoidTypeA.js');
 
 
 //DB接続情報-
-const { Client } = require('pg').native
+const { Client } = require('pg')
 
 const dbConfig = {
     user: process.env.ENV_USER,
