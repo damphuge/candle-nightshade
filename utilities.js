@@ -84,3 +84,4 @@ let getRelativeDate = function(relativeEx) {
 module.exports = {
     getRelativeDate: getRelativeDate
 };
+
