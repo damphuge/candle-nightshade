@@ -11,10 +11,10 @@ let Airi = require('./weatherRoidTypeA.js');
 const { Client } = require('pg')
 
 const DBclient = new Client({
-    user: 'process.env.ENV_USER',
-    host: 'process.env.ENV_HOST',
-    database: 'process.env.ENV_DB',
-    password: 'process.env.ENV_PASSWORD',
+    user: process.env.ENV_USER,
+    host: process.env.ENV_HOST,
+    database: process.env.ENV_DB,
+    password: process.env.ENV_PASSWORD,
     port: 5432,
 })
 
@@ -68,6 +68,34 @@ client.on('message', message =>
              DBclient.end()
          })
     }
+      const addwordOperation = '!addword';
+      if((new RegExp(`^${addwordOperation}`)).test(message.content)) {
+        console.log(`${addwordOperation}命令`);
+        const matches = (new RegExp(`^${addwordOperation} ([^\\ ]+) (.+)$`))
+          .exec(message.content);
+        console.log(matches);
+        if (matches === null) {
+          console.log(`${addwordOperation} 命令の形式にマッチしませんでした`);
+          return;
+        }
+
+        const keyWord = matches[1];
+        const keyDescription = matches[2];
+
+        DBclient.connect();
+        
+        DBclient.query(`INSERT INTO messages VALUES (${keyWord}, ${keyDescription})`)
+        .then(res => {
+          console.log(`Insert (${keyWord}: ${keyDescription})`);
+          message.reply(`追加しました. \`!word ${keyWord}\` で試してみてくれ`);
+          return;
+        })
+        .catch(err => {
+          console.error(err);
+          message.reply(`エラーしたわ。原因は知らん`);
+          return;
+        });
+      }
     
 
         //日本地図
