@@ -51,12 +51,12 @@ client.on('message', message =>
         }
 
         //お仕置き執行人津波両夢
-        if (message.content === '差別') {
-            console.log("差別");
+        if (message.content === '差別' || message.content === '黒人' || message.content === '朝鮮' || message.content === '在日' || message.content === 'チョッパリ' || message.content === 'SS' || message.content === 'ナチ') {
+            console.log("差別検知");
             let channel = message.channel;
             let author = message.author.username;
             // そのチェンネルにメッセージを送信する
-            message.reply("text",{files: [{ attachment: "https://cdn.discordapp.com/attachments/768317965800046602/827823207553040414/88808193_p0_master1200.jpg", name: "津波両夢.png" }]});
+            message.reply("差別検知!!津波両夢は差別を許しません!",{files: [{ attachment: "https://cdn.discordapp.com/attachments/768317965800046602/827823207553040414/88808193_p0_master1200.jpg", name: "津波両夢.png" }]});
             return;
         }
 
