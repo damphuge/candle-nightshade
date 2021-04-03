@@ -70,7 +70,7 @@ client.on('message', message =>
           })
           .catch(err => {
             console.error(err);
-            message.reply(`エラーしたわ。原因は知らん`);
+            message.reply(`エラーしたわ。${err}`);
             return;
           });
     }
