@@ -19,7 +19,9 @@ const dbConfig = {
     ssl: {
       sslmode: 'require',
       rejectUnauthorized: false
-    }
+    },
+    connectionTimeoutMillis: 0, // number of milliseconds to wait for connection, default is no timeout
+    idle_in_transaction_session_timeout: 0 //
 };
 
 // Response for Uptime Robot
