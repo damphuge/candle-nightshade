@@ -18,7 +18,7 @@ const dbConfig = {
     port: 5432,
     ssl: {
       sslmode: 'require',
-      rejectUnauthorized: process.env.DB_SSL ?? false
+      rejectUnauthorized: false
     }
 };
 
