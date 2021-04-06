@@ -19,9 +19,7 @@ const dbConfig = {
     ssl: {
       sslmode: 'require',
       rejectUnauthorized: false
-    },
-    connectionTimeoutMillis: 0, // number of milliseconds to wait for connection, default is no timeout
-    idle_in_transaction_session_timeout: 0 //
+    }
 };
 
 // Response for Uptime Robot
@@ -76,7 +74,9 @@ client.on('message', message =>
           })
           .catch(err => {
             console.error(err);
-            message.reply(`エラーしたわ。${err} ${JSON.stringify(dbConfig)} ${err.stack}`);
+            message.reply(`エラーしたわ。${err}
+JSON: ${JSON.stringify(dbConfig)}
+stack: ${err.stack}`);
             return;
           })
           .finally(()=> {
