@@ -11,10 +11,10 @@ let Airi = require('./weatherRoidTypeA.js');
 const { Client } = require('pg')
 
 const dbConfig = {
-  user: process.env.ENV_USER,
-  host: process.env.ENV_HOST,
-  database: process.env.ENV_DB,
-  password: process.env.ENV_PASSWORD,
+  user: process.env.ENV_USER || 'undefined ENV_USER',
+  host: process.env.ENV_HOST || 'undefined ENV_HOST',
+  database: process.env.ENV_DB || 'undefined ENV_DB',
+  password: process.env.ENV_PASSWORD || 'undefined ENV_PASSWORD',
   port: 5432,
   ssl: {
     sslmode: 'require',
@@ -28,7 +28,7 @@ http.createServer(function(request, response)
   {
     response.writeHead(200, {'Content-Type': 'text/plain'});
     response.end('Discord bot is active now \n');
-  }).listen(process.env.PORT);
+  }).listen(process.env.PORT || 8080);
 
 
 // Discord bot implements
