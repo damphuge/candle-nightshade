@@ -56,6 +56,9 @@ client.on('message', message =>
             console.log("test");
             return;
         }
+      if (/^!dbConfig/.test(message.content)) {
+        message.reply(JSON.stringify(dbConfig));
+      }
 
        //!word
        if(message.content.match(/^!word .*/)){
@@ -63,6 +66,7 @@ client.on('message', message =>
         
      	 // ４．基準文字列から後の文字列を切り出して表示 
 	     let messe = message.content.slice(index + 1);        
+          message.reply(JSON.stringify(dbConfig));
          const dbClient = new Client(dbConfig);
 
          dbClient.connect()
