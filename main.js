@@ -91,14 +91,15 @@ client.on('message', message =>
     const addwordOperation = '!addword';
     if((new RegExp(`^${addwordOperation}`)).test(message.content)) {
       console.log(`${addwordOperation}命令`);
-      const matches = (new RegExp(`^${addwordOperation} ([^\\ ]+) (.+)$`))
+      const separations = `\\s\\r\\n`;
+      const matches = (new RegExp(`^${addwordOperation}[${separations}]+([^${separations}]+)[${separations}]+([^]+)`))
         .exec(message.content);
       console.log(matches);
       if (matches === null) {
         console.log(`${addwordOperation} 命令の形式にマッチしませんでした`);
         message.reply(
-          'usage: `!addword 登録したいキーワード 登録したい説明文`\n' +
-          '※説明文に改行は対応していない。すまん'
+          'usage: `!addword 登録したいキーワード 登録したい説明文（改行可）`\n' +
+          '※死ぬほど大きいAAには対応してないらしい。詳しくは俺もわからん'
         );
         return;
       }
