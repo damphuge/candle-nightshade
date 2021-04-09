@@ -37,11 +37,18 @@ var ch = require('cheerio-httpcli');
 
 const prefix = process.env.COMMAND_PREFIX || '!';
 
-/*
- * @property callback function(message: discord.Message)
+/**
+ * Cog.
  */
 class Cog {
-  constructor(command, callback, name, description, parameter) {
+  /**
+   * @param {string} command
+   * @param {function} callback function(message: discord.Message)
+   * @param {string} name
+   * @param {string} description
+   * @param {string} parameter
+   */
+  constructor(command, callback, name='', description='', parameter='') {
     this.validate(command, callback);
 
     this.command = command;
@@ -67,15 +74,21 @@ class Cog {
     }
   }
   get usage() {
-    return `${prefix}${this.command}` + (this.parameter ? ` ${this.parameter}` : '');
+    return `\`${prefix}${this.command}` + (this.parameter ? ` ${this.parameter}\`` : '`');
   }
 }
 
-/*
- * @property callback function(message: discord.Message)
+/**
+ * Sensor.
  */
 class Sensor {
-  constructor(name, words, callback, description) {
+  /**
+   * @param {string} name
+   * @param {string[]} words
+   * @param {function} callback function(message: discord.Message)
+   * @param {string} description
+   */
+  constructor(name, words, callback, description='') {
     this.validate(name, words, callback);
 
     this.name = name;
