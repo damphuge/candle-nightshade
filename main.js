@@ -44,7 +44,7 @@ client.on('ready', message =>
   });
 
 
-client.on('message', message =>
+client.on('message', async message =>
   {
     // bot自身の発言は無視
     if (message.author.bot) return;
@@ -53,7 +53,7 @@ client.on('message', message =>
     const channel = message.channel;
 
     //メンション
-    if(message.isMemberMentioned(client.user))
+    if(message.mentions.has(client.user.id))
     {
       message.reply( 'やりますねぇ！' );
       console.log("test");
@@ -88,6 +88,7 @@ client.on('message', message =>
           dbClient.end();
         });
     }
+
     const addwordOperation = '!addword';
     if((new RegExp(`^${addwordOperation}`)).test(message.content)) {
       console.log(`${addwordOperation}命令`);
@@ -163,6 +164,25 @@ client.on('message', message =>
         })
     }
 
+    if (/^!amni/.test(message.content)) {
+      const { createCanvas, loadImage, registerFont } = require('canvas');
+
+      registerFont('./assets/07YasashisaAntique.otf', { family: 'YasashisaAntique'});
+
+      const canvas = createCanvas(480, 511);
+      const ctx = canvas.getContext('2d');
+
+      const image = await loadImage('https://i.imgur.com/Ud3VrYx.jpg')
+      console.log("image loaded", image);
+      ctx.drawImage(image, 0, 0, 480, 511);
+      ctx.font = '12px "YasashisaAntique"';
+      ctx.fillText('魅せますか', 52, 65);
+
+      const attachment = new discord.MessageAttachment(canvas.toBuffer(), 'amanai-image.jpg');
+
+      message.channel.send(`魅せますか`, attachment);
+    }
+
     //日本地図
     if (message.content === 'にほん') {
       console.log("にほん");
@@ -224,7 +244,7 @@ client.on('message', message =>
 
     //　敗北者という単語が含まれていたときの処理
     if (message.content.includes(":test:")) {
-      if (message.isMemberMentioned(client.user) && message.member.voiceChannel) {
+      if (message.mentions.has(client.user.id) && message.member.voiceChannel) {
         /* ボイスチャンネルにいる人がbotにメンションをしたときの処理 */
         message.member.voiceChannel
           .join()
