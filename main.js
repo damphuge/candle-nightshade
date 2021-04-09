@@ -164,7 +164,19 @@ client.on('message', async message =>
         })
     }
 
-    if (/^!amni/.test(message.content)) {
+    const amanaiYuCommand = 'amni';
+    if ((new RegExp(`^!${amanaiYuCommand}`)).test(message.content)) {
+      // 「魅せますか」に該当する文字列抽出
+      const japaneseStringRune = `[\u30a0-\u30ff\u3040-\u309f\u3005-\u3006\u30e0-\u9fcf]`
+      const match = (new RegExp(`^!${amanaiYuCommand} (${japaneseStringRune}{5})$`))
+        .exec(message.content);
+      if (match === null) {
+        message.reply(`usage: !${amanaiYuCommand} ○○○○○`, {code: true})
+        return;
+      }
+      const misemasuka = match[1];
+
+      // 画像処理
       const { createCanvas, loadImage, registerFont } = require('canvas');
 
       registerFont('./assets/07YasashisaAntique.otf', { family: 'YasashisaAntique'});
@@ -175,12 +187,17 @@ client.on('message', async message =>
       const image = await loadImage('https://i.imgur.com/Ud3VrYx.jpg')
       console.log("image loaded", image);
       ctx.drawImage(image, 0, 0, 480, 511);
-      ctx.font = '12px "YasashisaAntique"';
-      ctx.fillText('魅せますか', 52, 65);
+      const fontsize = 22
+      ctx.font = `${fontsize}px "YasashisaAntique"`;
+      ctx.fillStyle = "rgb(45, 45, 45)"
+
+      // 縦書きなので一文字ずつ
+      misemasuka.split('')
+        .forEach((rune, index) => ctx.fillText(rune, 53, 89 + fontsize*index + index))
 
       const attachment = new discord.MessageAttachment(canvas.toBuffer(), 'amanai-image.jpg');
 
-      message.channel.send(`魅せますか`, attachment);
+      message.channel.send(attachment);
     }
 
     //日本地図
