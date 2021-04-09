@@ -130,6 +130,39 @@ client.on('message', message =>
       return;
     }
 
+    if(/^!words/.test(message.content)) {
+      const limit = 100;
+      const content = message.content.replace(/^!words/, '').trim();
+      let query = 'SELECT word FROM messages'
+      if (content.length) {
+        query = query + ' WHERE ' +
+          content.split(new RegExp(`[\\s\\r\\n]+`))
+          .map(keyword => `word LIKE '%${keyword}%'`)
+          .join(' AND ');
+      }
+      query = `${query} LIMIT ${limit}`;
+      console.log(`SQL: ${query}`)
+
+      const dbClient = new Client(dbConfig);
+
+      dbClient.connect()
+      dbClient
+        .query(query)
+        .then(res => {
+          if(res.rows.length == 0) {
+            message.reply('http://scp-jp.wikidot.com/scp-511-jp');
+            return;
+          }
+          message.reply(`${res.rows.length}件取得: ` + res.rows.reduce((prev, row, index) => `${prev}${index == 0 ? '' : ', '}${row.word}`, ''), {
+            code: true
+          });
+        })
+        .catch(err => {
+          console.error(err);
+          message.reply('エラった');
+        })
+    }
+
     //日本地図
     if (message.content === 'にほん') {
       console.log("にほん");
