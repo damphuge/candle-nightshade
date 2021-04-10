@@ -167,11 +167,11 @@ client.on('message', async message =>
     const amanaiYuCommand = 'amni';
     if ((new RegExp(`^!${amanaiYuCommand}`)).test(message.content)) {
       // 「魅せますか」に該当する文字列抽出
-      const japaneseStringRune = `[\u30a0-\u30ff\u3040-\u309f\u3005-\u3006\u30e0-\u9fcf]`
-      const match = (new RegExp(`^!${amanaiYuCommand} (${japaneseStringRune}{5})$`))
+      const japaneseStringRune = `[\u30a0-\u30ff\u3040-\u309f\u3005-\u3006\u30e0-\u9fcfＡ-Ｚ０-９]`
+      const match = (new RegExp(`^!${amanaiYuCommand} (${japaneseStringRune}{1,10})$`))
         .exec(message.content);
       if (match === null) {
-        message.reply(`usage: !${amanaiYuCommand} ○○○○○`, {code: true})
+        message.reply(`usage: !${amanaiYuCommand} ○○○○○\n※１～１０文字可能`, {code: true})
         return;
       }
       const misemasuka = match[1];
@@ -185,15 +185,34 @@ client.on('message', async message =>
       const ctx = canvas.getContext('2d');
 
       const image = await loadImage('https://i.imgur.com/Ud3VrYx.jpg')
+      const runeLeaderImage = await loadImage('https://i.imgur.com/8RL2Y1W.jpg')
+      // (22, 22) の '︙'画像
+
+      const base = { x: 53, y: 89 };
+      // runeLeaderImage のサイズが fontsize=22 を想定。変更するなら拡大縮小対応が必要か
+      const fontsize = 22
       console.log("image loaded", image);
       ctx.drawImage(image, 0, 0, 480, 511);
-      const fontsize = 22
+
+      // 文字領域を白で塗りつぶす
+      ctx.fillStyle = "rgb(250, 250, 250)";
+      ctx.fillRect(base.x - fontsize, base.y - fontsize, fontsize * 2 + 1, fontsize * 5 + 15);
+
       ctx.font = `${fontsize}px "YasashisaAntique"`;
       ctx.fillStyle = "rgb(45, 45, 45)"
 
       // 縦書きなので一文字ずつ
       misemasuka.split('')
-        .forEach((rune, index) => ctx.fillText(rune, 53, 89 + fontsize*index + index))
+        .forEach((rune, index) => {
+          const x = base.x + (index < 5 ? 0 : -fontsize-7);
+          const y = base.y + fontsize * (index % 5) + index % 5;
+          ctx.fillText(rune, x, y);
+        });
+      for(let i=misemasuka.length; i<10; i++) {
+        const x = base.x + (i < 5 ? 0 : -fontsize-7);
+        const y = base.y + fontsize * (i % 5) + i % 5 - fontsize + 4;
+        ctx.drawImage(runeLeaderImage, x, y, 22, 22);
+      }
 
       const attachment = new discord.MessageAttachment(canvas.toBuffer(), 'amanai-image.jpg');
 
