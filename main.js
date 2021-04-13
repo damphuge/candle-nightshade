@@ -53,7 +53,7 @@ client.on('message', async message =>
     const channel = message.channel;
 
     //メンション
-    if(message.mentions.has(client.user.id))
+    if(!message.mentions.everyone && message.mentions.has(client.user.id))
     {
       message.reply( 'やりますねぇ！' );
       console.log("test");
