@@ -44,7 +44,11 @@ client.on('message', async message =>
     if (message.author.bot) return;
 
     //メンション
-    if(!message.mentions.everyone && message.mentions.has(client.user.id))
+    if(
+      !message.mentions.everyone &&
+      message.mentions.has(client.user.id) &&
+      /^<@!?(?:\d+)>$/.test(message.content)
+    )
     {
       message.reply( 'やりますねぇ！' );
       console.log("test");
