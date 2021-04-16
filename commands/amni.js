@@ -2,6 +2,7 @@
 
 const { resolve: r } = require('path');
 const cjk = require('cjk-regex');
+const { toWide } = require('jaco');
 const { MessageAttachment } = require('discord.js');
 const { prefix } = require('../config');
 
@@ -18,6 +19,7 @@ const description = '魅せますか……………';
 const execute = async (message, args) => {
   let misemasuka = args.shift();
 
+  misemasuka = toWide(misemasuka);
   const cjkRune = `(?:${cjk().toString()})`;
   const regex = new RegExp(`^${cjkRune}{1,10}$`);
   const match = regex.exec(misemasuka);

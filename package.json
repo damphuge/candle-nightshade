@@ -13,6 +13,7 @@
     "fs": "*",
     "google-auth-library": "^5.2.1",
     "googleapis": "^43.0.0",
+    "jaco": "^4.0.0",
     "jquery": "^3.4.1",
     "osmosis": "^1.1.10",
     "pg": "^8.5.1",
