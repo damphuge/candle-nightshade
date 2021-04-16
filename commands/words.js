@@ -14,7 +14,7 @@ const execute = (message, args) => {
   let query = 'SELECT word FROM messages'
   if (args.length) {
     query = query + ' WHERE ' +
-      args.map(keyword => `word LIKE '%${keyword}%'`).join(' AND ');
+      args.map(keyword => `word LIKE '%${keyword}%'`).join(' OR ');
   }
   query = `${query} LIMIT ${limit}`;
   console.log(`SQL: ${query}`)
@@ -49,5 +49,5 @@ module.exports = {
   description,
   execute,
   args: false,
-  usage: '<単語>',
+  usage: '<?単語> <?単語> ...',
 };
