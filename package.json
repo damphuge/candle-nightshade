@@ -10,7 +10,6 @@
     "date-fns-timezone": "^0.1.4",
     "discord.js": "^12.5.3",
     "dotenv": "^8.2.0",
-    "fs": "*",
     "google-auth-library": "^5.2.1",
     "googleapis": "^43.0.0",
     "jaco": "^4.0.0",
