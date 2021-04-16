@@ -30,7 +30,10 @@ const execute = (message, args) => {
         return;
       }
       const result = res.rows.map(row => row.word).join(', ');
-      message.reply(`${res.rows.length}件取得`, { code: result });
+      if(args.length) {
+        console.log(`result: ${result}`);
+      }
+      message.reply(`${res.rows.length}件取得\n\n${result}`, { code: true });
       return;
     })
     .catch(err => {
@@ -46,5 +49,5 @@ module.exports = {
   description,
   execute,
   args: false,
-  usage: '<?単語> (<単語>, ...)',
+  usage: '<単語>',
 };

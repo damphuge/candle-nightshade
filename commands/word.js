@@ -17,7 +17,7 @@ const execute = (message, args) => {
   dbClient.connect()
 
   dbClient
-    .query(`SELECT message FROM messages WHERE word = '${messe}' LIMIT 1`)
+    .query('SELECT message FROM messages WHERE word = $1 LIMIT 1', [messe])
     .then(res => {
       if(res.rows.length == 0) {
         message.reply(`そんな言葉は知らない. You should use \`!addword ${messe} <description>\`.`);

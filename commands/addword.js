@@ -22,7 +22,7 @@ const execute = (message, args) => {
   if (matches === null) {
     console.log(`命令の形式にマッチしませんでした`);
     message.reply(
-      'usage: `!addword 登録したいキーワード 登録したい説明文（改行可）`\n' +
+      `usage: \`${prefix}${name} 登録したいキーワード 登録したい説明文（改行可）\`\n` +
       '※死ぬほど大きいAAには対応してないらしい。詳しくは俺もわからん'
     );
     return;
@@ -31,26 +31,27 @@ const execute = (message, args) => {
   const keyWord = matches[1];
   const keyDescription = matches[2];
 
-  const constraintName = 'messages_word_key';
-  const insertQuery = `INSERT INTO messages (word, message) VALUES ('${keyWord}', '${keyDescription}')
-          ON CONFLICT ON CONSTRAINT ${constraintName}
-          DO UPDATE SET message='${keyDescription}'`;
-  console.log(`SQL: ${insertQuery}`);
-
   const dbClient = new DBClient(dbConfig)
-
   dbClient.connect();
+
+  const constraintName = 'messages_word_key';
+  const insertQuery = `INSERT INTO messages (word, message) VALUES ($1, $2)
+            ON CONFLICT ON CONSTRAINT ${constraintName} DO UPDATE SET message = $2`;
+
   dbClient
-    .query(insertQuery)
+    .query(insertQuery, [keyWord, keyDescription])
     .then(res => {
-      console.log(`Insert (${keyWord}: ${keyDescription})`);
+      console.log(`Upsert ${keyWord}: ${keyDescription} by ${message.member.displayName}<${message.member.id}>`);
       message.reply(`追加しました. \`!word ${keyWord}\` で試してみてくれ`);
     })
     .catch(err => {
       console.error(err);
       message.reply(`エラーしたわ。原因は知らん`);
     })
-    .finally(() => dbClient.end());
+    .finally(() => {
+      dbClient.end();
+    });
+
   return;
 };
 
