@@ -1,7 +1,7 @@
 'use strict';
 
 const name = 'オーキド博士';
-const description = '';
+const description = null;
 
 const words = [
   'オーキド博士'

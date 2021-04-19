@@ -55,18 +55,29 @@ const removeMention = (content, flags) => {
 
 const separations = '\\s\\r\\n';
 
+/**
+ * commandUsage.
+ *
+ * @param {Object} command or sensor
+ * @return {string} help
+ */
 const commandUsage = (command) => {
-  const {name, args, usage, description} = {...command}
-  console.log(name, args, usage, description);
-  console.log('commandUsage');
-  let help = `${prefix}${name}`
-  console.log('prefixname');
+  const {name, words, args, usage, description} = {...command}
+  console.log(name, words, args, usage, description);
+
+  let help;
+
+  const isSensor = Number.isInteger(words?.length);
+  if (isSensor) {
+    help = `単語：${words.join(', ')}`
+    return help;
+  }
+  help = `${prefix}${name}`
+
   if (usage) {
     help = `${help} ${usage}`;
-  console.log('usage');
   }
   else if (args) {
-  console.log('elif');
     help = `${help} <なんか>`;
   }
 

@@ -25,11 +25,18 @@ client.commands = moduleReader('./commands');
 client.sensors = moduleReader('./sensors');
 
 // ヘルプコマンド用のメッセージ作成
-const help = new discord.MessageEmbed().addFields(
-  client.commands.map(command => {
-    return {name: command.name, value: command.description, inline: false};
-  })
-);
+const help = new discord.MessageEmbed()
+  .addFields(
+    client.commands.map(command => {
+      return {name: command.name, value: command.description, inline: true};
+    })
+  )
+  .addField('\u200B', '\u200B', false /* 空白区切り */)
+  .addFields(
+    client.sensors.map(sensor => {
+      return {name: sensor.name, value: sensor.description || `\`!help ${sensor.name}\``, inline: true};
+    })
+  );
 
 //ここからBOTの反応
 client.on('ready', message =>
@@ -62,7 +69,7 @@ client.on('message', async message =>
     if (commandName === 'help') {
       if (args.length) {
         const cmdName = args.shift()
-        const cmd = client.commands.get(cmdName);
+        const cmd = client.commands.get(cmdName) ?? client.sensors.get(cmdName);
         if (!cmd) {
           return message.reply(help);
         }
