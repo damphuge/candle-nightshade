@@ -26,12 +26,15 @@ client.sensors = moduleReader('./sensors');
 
 // ヘルプコマンド用のメッセージ作成
 const help = new discord.MessageEmbed()
+  .setDescription('各 Bot の詳細は `!help <Bot名>` で確認しろ')
+  .addField('🔰コマンド打つ Bot', '\u200B', false)
   .addFields(
     client.commands.map(command => {
       return {name: command.name, value: command.description, inline: true};
     })
   )
   .addField('\u200B', '\u200B', false /* 空白区切り */)
+  .addField('🔰言葉に反応する Bot', '\u200B', false)
   .addFields(
     client.sensors.map(sensor => {
       return {name: sensor.name, value: sensor.description || `\`!help ${sensor.name}\``, inline: true};
