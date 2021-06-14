@@ -1,5 +1,7 @@
 const Discord = require('discord.js')
 
+const config = require('./config')
+
 /*
  * ミュートボイチャ用テキストチャンネルを見えるようにする
  * @param {Discord.VoiceState} oldState
@@ -20,7 +22,7 @@ const addGrantViewingNoVoiceChannel = (oldState, newState) => {
     return
   }
 
-  const role = member.guild.roles.cache.find((id, _) => id === roleId)
+  const role = member.guild.roles.cache.find((_, id) => id === roleId)
   if (!role) {
     console.error(`cannot find role(<@${roleId}>)`)
     return
@@ -30,6 +32,11 @@ const addGrantViewingNoVoiceChannel = (oldState, newState) => {
   return
 };
 
+/*
+ * ミュートボイチャ用テキストチャンネルを見えるようにする
+ * @param {Discord.VoiceState} oldState
+ * @param {Discord.VoiceState} newState
+ */
 const removeGrantViewingNoVoiceChannel = (oldState, newState) => {
   if (!oldState.channel) {
     return;
@@ -45,7 +52,7 @@ const removeGrantViewingNoVoiceChannel = (oldState, newState) => {
     return
   }
 
-  const role = member.guild.roles.cache.find((id, _) => id === roleId)
+  const role = member.guild.roles.cache.find((_, id) => id === roleId)
   if (!role) {
     console.error(`cannot find role(<@${roleId}>)`)
     return
@@ -55,7 +62,7 @@ const removeGrantViewingNoVoiceChannel = (oldState, newState) => {
   return
 }
 
-export {
+module.exports = {
   addGrantViewingNoVoiceChannel,
   removeGrantViewingNoVoiceChannel
 };
