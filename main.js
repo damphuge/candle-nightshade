@@ -48,6 +48,10 @@ client.on('ready', message =>
     console.log('bot is ready!');
   });
 
+const { addGrantViewingNoVoiceChannel, removeGrantViewingNoVoiceChannel} = require('./novoice')
+client.on('voiceStateUpdate', addGrantViewingNoVoiceChannel);
+client.on('voiceStateUpdate', removeGrantViewingNoVoiceChannel);
+
 client.on('message', async message =>
   {
     // bot自身の発言は無視
