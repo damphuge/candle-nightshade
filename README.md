@@ -11,7 +11,7 @@ npm WARN read-shrinkwrap This version of npm is compatible with lockfileVersion@
 nara@0.0.0 /app
 `-- discord.js@12.5.3
 ```
-beforecheck: install heroku cli （でもGGnara以外loginできないんで～、ほしい人APIキーあげあす）
+beforecheck: install heroku cli （でもGGnara以外loginできないんで～、ほしい人はAPIキーあげあす）
 
 # Discord sample bot working on glitch.com(移行前)
 
@@ -28,4 +28,3 @@ To get discord bot token, visit discord official develoer site; https://discorda
 Applications on `glitch.com` may sleep when keep no access for 5 minutes.
 You must ping application URL every 5 minutes to run your bot continuously.
 Using `uptimerobot.com` service is just good.
-
