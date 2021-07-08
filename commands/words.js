@@ -11,7 +11,7 @@ const description = '登録単語の検索システム';
  * @param {Array.<string>} args
  */
 const execute = (message, args) => {
-  const limit = 100;
+  const limit = 1000;
   let query = 'SELECT word FROM messages'
   if (args.length) {
     query = query + ' WHERE ' +
